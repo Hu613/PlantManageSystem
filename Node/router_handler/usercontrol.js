@@ -17,7 +17,7 @@ db.getConnection((err, connection) => {
 });
 
   function register(req, res) {
-    const { username, email, password } = req.body;
+    const { username, email, password, lat, lon} = req.body;
     console.log('Received register request:', req.body);
     const checkQuery = `SELECT * FROM user WHERE email = ?`;
     db.query(checkQuery, [email], (err, results) => {
@@ -29,8 +29,13 @@ db.getConnection((err, connection) => {
           res.status(400).json({ error: 'Email already registered' });
         } else {
           const id = uuid();
-          const insertQuery = `INSERT INTO user (id, username, password, email) VALUES (?, ?, ?, ?)`;
-          db.query(insertQuery, [id, username, password, email], (err) => {
+          const picture = req.file;
+          if(!picture){
+            return res.status(400).json({error: 'No file upload'});
+          }
+          const useravatar = picture.path;
+          const insertQuery = `INSERT INTO user (id, username, password, email,useravatar,lat,lon) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+          db.query(insertQuery, [id, username, password, email,useravatar,lat,lon], (err) => {
             if (err) {
               console.error('Error creating user: ', err);
               res.status(500).json({ error: 'Internal server error' });
