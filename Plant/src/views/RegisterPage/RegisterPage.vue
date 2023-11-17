@@ -31,7 +31,8 @@
   import { reactive, ref } from 'vue';
   import axios from 'axios';
   import type { FormProps } from 'element-plus';
-  
+  import {useRouter} from 'vue-router'
+const router = useRouter();
   const labelPosition = ref<FormProps['labelPosition']>('right');
   const formLabelAlign = reactive({
     name: '',
@@ -68,7 +69,7 @@
       });
       alert('Registration successful');
       console.log(response.data);
-
+      router.push('/');
     } catch (error) {
       alert('Registration failed: ' + error.response.data.error);
       console.error('Registration error:', error);

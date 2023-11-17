@@ -8,6 +8,7 @@
   </div>
 </template>
 
+
 <script>
 import Title from "@/views/Title.vue";
 import Content from "@/views/Content.vue";
@@ -40,7 +41,7 @@ export default {
 .main-content {
   display: flex;
   flex: 1; 
-  background-color: rgb(23, 60, 92);
+  background-color: white;
   color:black;
 }
 

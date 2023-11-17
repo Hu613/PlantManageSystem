@@ -12,4 +12,14 @@
     },
   };
   </script>
-  
+ <style scoped>
+ .context {
+   width: 82%;
+   height: 100%;
+   float: left;
+   overflow: auto; 
+   background: white; 
+   color: black; 
+ }
+ </style>
+ 
