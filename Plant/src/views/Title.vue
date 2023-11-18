@@ -45,7 +45,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Search } from '@element-plus/icons-vue';
 import { ChromeFilled } from '@element-plus/icons-vue'
-import User from "../components/content/user.vue"; 
+import User from "../components/content/Usercontent/user.vue"; 
 
 const searchcontent = ref('');
 const pagesearchcontent = ref(''); 

@@ -84,17 +84,16 @@ db.getConnection((err, connection) => {
     console.log("user session userId", req.body);
     const shareid = uuid();
   
-    const sharePicture = req.files.map(file => file.path).join(';'); 
-    const createtime = new Date().toISOString().slice(0, 19).replace('T', ' '); 
+    const sharePicture = req.files.map(file => file.path).join(';');  
     const entertime = 0;
 
     const insertQuery = `
-      INSERT INTO share (shareid, title, description, sharepicture, userId, entertime, createtime)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO share (shareid, title, description, sharepicture, userId, entertime)
+      VALUES (?, ?, ?, ?, ?, ?)
     `;
   
 
-    db.query(insertQuery, [shareid, title, description, sharePicture, userId, entertime, createtime], (err, results) => {
+    db.query(insertQuery, [shareid, title, description, sharePicture, userId, entertime], (err, results) => {
       if (err) {
         console.error('Error inserting into database: ', err);
         res.status(500).json({ error: 'Internal server error' });

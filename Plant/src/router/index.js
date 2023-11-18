@@ -4,6 +4,7 @@ import RegisterPage from "../views/RegisterPage/RegisterPage.vue"
 import Login from "../views/Login/Login.vue"
 import CreateExperience from "../views/Experience/CreateExperience.vue"
 import Social from "../views/Social.vue"
+import SharePage from "../views/Experience/SharePage.vue"
 const routes = [
   {
     path:"/",component: HomePage
@@ -19,6 +20,9 @@ const routes = [
   },
   {
     path:"/Social",component: Social
+  },
+  {
+    path:"/SharePage/:shareid",component: SharePage, Comment
   }
 ]  
   

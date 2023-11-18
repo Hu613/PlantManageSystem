@@ -18,7 +18,8 @@
           <el-input v-model="formLabelAlign.lon" />
         </el-form-item>
         <el-form-item label="Avatar">
-          <input type="file" @change="handleFileUpload" />
+
+          <input type="file" @change="handleFileUpload"/>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm">Register</el-button>
@@ -32,7 +33,8 @@
   import axios from 'axios';
   import type { FormProps } from 'element-plus';
   import {useRouter} from 'vue-router'
-const router = useRouter();
+
+  const router = useRouter();
   const labelPosition = ref<FormProps['labelPosition']>('right');
   const formLabelAlign = reactive({
     name: '',
