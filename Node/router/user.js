@@ -14,4 +14,12 @@ router.post('/createExperience', upload.array('sharepictures',5), userControl.cr
 
 router.post('/incrementEnterTime/:shareid/enter', userControl.incrementEnterTime);
 
+router.get('/getuserpage/:userId', userControl.getuserpage);
+
+router.post('/collect', userControl.collect);
+
+router.post('/deleteshare', userControl.deleteshare);
+
+router.post('/deletecollect', userControl.deletecollect);
+
 module.exports = router;

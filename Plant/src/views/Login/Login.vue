@@ -43,7 +43,6 @@
       localStorage.setItem('user', JSON.stringify(response.data));
       router.push('/');
       alert('Login successful');
-      location.reload();
       console.log(response.data);
       
     } catch (error) {

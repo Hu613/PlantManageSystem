@@ -5,6 +5,7 @@ import Login from "../views/Login/Login.vue"
 import CreateExperience from "../views/Experience/CreateExperience.vue"
 import Social from "../views/Social.vue"
 import SharePage from "../views/Experience/SharePage.vue"
+import UserPage from "../views/UserPage.vue"
 const routes = [
   {
     path:"/",component: HomePage
@@ -22,8 +23,11 @@ const routes = [
     path:"/Social",component: Social
   },
   {
-    path:"/SharePage/:shareid",component: SharePage, Comment
-  }
+    path:"/SharePage/:shareid",component: SharePage
+  },
+  {
+    path:"/UserPage/:userId",component: UserPage
+  },
 ]  
   
   const router = createRouter({

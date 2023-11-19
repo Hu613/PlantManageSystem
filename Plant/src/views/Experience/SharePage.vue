@@ -2,11 +2,13 @@
   <div>
     <h1 class="title">{{ shareData.title }}</h1>
     <div class="user-info">
+      <h1>Authour:</h1><br/>
       <img :src="shareData.useravatar" alt="User avatar" class="user-avatar"/>
       <span>{{ shareData.username }}</span>
     </div>
     <div class="pictures">
-      <img v-for="(picture, index) in shareData.images" :src="picture" :key="index" class="share-picture" alt="Shared content"/>
+      <h1>Exhibition :</h1><br/>
+      <img v-for="(picture, index) in shareData.images" :src="picture" :key="index" class="share-picture" />
     </div>
     <p class="description">Description<br />{{ shareData.description }}</p>
     <div class="button">

@@ -17,7 +17,7 @@ db.getConnection((err, connection) => {
 });
 
 function getsocial(req, res) {
-    const query = `SELECT shareid, title, LEFT(description, 100) as description, sharepicture FROM share`;
+    const query = `SELECT shareid, title, LEFT(description, 30) as description, sharepicture FROM share`;
     db.query(query, (err, results) => {
       if (err) {
         console.error('Error fetching share: ', err);
@@ -80,10 +80,88 @@ function getsocial(req, res) {
   });
 }
 
-  
+function getnewsocial(req, res) {
+  const query = `SELECT shareid, title, LEFT(description, 30) as description, sharepicture FROM share
+                 ORDER BY createtime DESC LIMIT 4`;
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching share: ', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+    
+      const share = results.map(share => ({
+        ...share,
+        image: share.sharepicture.split(';')[0] 
+      }));
+      res.json(share);
+    }
+  });
+}
+
+function gethotsocial(req, res) {
+  const query = `SELECT shareid, title, LEFT(description, 30) as description, sharepicture FROM share 
+                 ORDER BY entertime DESC LIMIT 4`;
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching share: ', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+    
+      const share = results.map(share => ({
+        ...share,
+        image: share.sharepicture.split(';')[0] 
+      }));
+      res.json(share);
+    }
+  });
+}
+
+function getusersocial(req, res) {
+  const userId = req.params.userId;
+  const query = `SELECT shareid, title, LEFT(description, 30) as description, sharepicture, userId FROM share WHERE userId = ?`;
+  db.query(query, [userId],(err, results) => {
+    if (err) {
+      console.error('Error fetching share: ', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+    
+      const share = results.map(share => ({
+        ...share,
+        image: share.sharepicture.split(';')[0] 
+      }));
+      res.json(share);
+    }
+  });
+}
+
+
+function getusercollect(req, res) {
+  const userId = req.params.userId;
+  const query = `SELECT s.shareid, s.title, LEFT(s.description, 30) as description, s.sharepicture, s.createtime FROM share s
+    JOIN collection c ON s.shareid = c.shareid
+    WHERE c.userId = ?`;
+  db.query(query, [userId],(err, results) => {
+    if (err) {
+      console.error('Error fetching share: ', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+    
+      const share = results.map(share => ({
+        ...share,
+        image: share.sharepicture.split(';')[0] 
+      }));
+      res.json(share);
+    }
+  });
+}
+
   module.exports = {
     getsocial,
-    getsocialpage
+    getsocialpage,
+    gethotsocial,
+    getnewsocial,
+    getusersocial,
+    getusercollect,
   };
   
    

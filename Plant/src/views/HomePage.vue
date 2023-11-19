@@ -1,51 +1,63 @@
 <template>
-
-  <el-row class="mb-4">
-    <el-button>Default</el-button>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
+  <div class="shareguide">
+    <h1>Share your Experience you want to share</h1>
+    <el-row :gutter="20">
+    <el-col :span="6"><div class="grid-content ep-bg-purple" /><el-icon color="lightgreen" size="100px"><Opportunity /></el-icon></el-col>
+    <el-col :span="6"><div class="grid-content ep-bg-purple" /><el-icon color="lightgreen" size="100px"><Flag /></el-icon></el-col>
+    <el-col :span="6"><div class="grid-content ep-bg-purple" /><el-icon color="lightgreen" size="100px"><Shop /></el-icon></el-col>
+    
   </el-row>
+    <el-row :gutter="20">
+    <el-col :span="6"><div class="grid-content ep-bg-purple" />Have a good idea? Wanna Share with others? </el-col>
+    <el-col :span="6"><div class="grid-content ep-bg-purple" />Login and Share your Experience!</el-col>
+    <el-col :span="6"><div class="grid-content ep-bg-purple" />Go Social Page, See Everyone's Life!</el-col>
 
-  <el-row class="mb-4">
-    <el-button plain>Plain</el-button>
-    <el-button type="primary" plain>Primary</el-button>
-    <el-button type="success" plain>Success</el-button>
-    <el-button type="info" plain>Info</el-button>
-    <el-button type="warning" plain>Warning</el-button>
-    <el-button type="danger" plain>Danger</el-button>
   </el-row>
+  </div>
+  <div class="HotSocial">
+    <h1>Hot Share : </h1><br/>
+    <Hotsocial></Hotsocial>
+  </div>
+  <div class="Plant">
+    <h1>Find you Plant </h1><br/>
+    <plant></plant>
+  </div>
+  <div class="Pest">
+    <h1>Pest Management: </h1><br/>
+    <pest></pest>
+  </div>
+  <div class="Supplier">
+    <h1>Supplier : </h1><br/>
+    <Supplier></Supplier>
+  </div>
 
-  <el-row class="mb-4">
-    <el-button round>Round</el-button>
-    <el-button type="primary" round>Primary</el-button>
-    <el-button type="success" round>Success</el-button>
-    <el-button type="info" round>Info</el-button>
-    <el-button type="warning" round>Warning</el-button>
-    <el-button type="danger" round>Danger</el-button>
-  </el-row>
+  </template>
+  
+  <script setup>
+  
+  import Hotsocial from '../components/content/socialcontent/hotsocial.vue';
+  
+  </script>
+  
+  <style scoped>
+  .shareguide{
+    background-color: white;
+  }
+  .el-row {
+  margin-bottom: 20px;
+}
 
-  <el-row>
-    <el-button :icon="Search" circle />
-    <el-button type="primary" :icon="Edit" circle />
-    <el-button type="success" :icon="Check" circle />
-    <el-button type="info" :icon="Message" circle />
-    <el-button type="warning" :icon="Star" circle />
-    <el-button type="danger" :icon="Delete" circle />
-  </el-row>
-</template>
+.el-row:last-child {
+  margin-bottom: 0;
+}
+.el-col {
+  border-radius: 4px;
+}
 
-<script lang="ts" setup>
-import {
-  Check,
-  Delete,
-  Edit,
-  Message,
-  Search,
-  Star,
-} from '@element-plus/icons-vue'
-</script>
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
 
-
+  </style>
+  

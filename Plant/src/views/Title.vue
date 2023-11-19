@@ -68,7 +68,7 @@ function googlesearch() {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: #ffffff;
+  
 }
 
 .top-Firstline {

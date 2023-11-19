@@ -89,8 +89,7 @@ db.getConnection((err, connection) => {
 
     const insertQuery = `
       INSERT INTO share (shareid, title, description, sharepicture, userId, entertime)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `;
+      VALUES (?, ?, ?, ?, ?, ?)`;
   
 
     db.query(insertQuery, [shareid, title, description, sharePicture, userId, entertime], (err, results) => {
@@ -120,12 +119,100 @@ db.getConnection((err, connection) => {
     });
   }
 
+  function getuserpage(req, res) {
+    const userId = req.params.userId;
+    console.log('userid', req.params.userId);
+    const query = `
+      SELECT id, username, useravatar
+      FROM user
+      WHERE id = ?`;
+  
+    db.query(query, [userId], (err, results) => {
+      if (err) {
+        console.error('Error fetching user:', err);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        if (results.length > 0) {
+          const user = results[0];
+          const userData = {
+            userId: user.id,
+            username: user.username,
+            useravatar: `http://localhost:3000/${user.useravatar}`
+          };
+          console.log('userdata:', userData);
+          res.json(userData);
+        } else {
+          res.status(404).json({ error: 'Cannot find user with the provided id' });
+        }
+      }
+    });
+  }
+
+  function collect(req, res) {
+    const { shareid ,userId } = req.body;
+    console.log("shareid and userId", req.body);
+    const collectionid = uuid();
+
+    const insertQuery = `
+      INSERT INTO collection (collectionid, shareid, userId)
+      VALUES (?, ?, ?)`;
+  
+
+    db.query(insertQuery, [collectionid,shareid, userId], (err, results) => {
+      if (err) {
+        console.error('Error inserting into database: ', err);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        res.status(200).json({ message: 'Collect successfully', collectionid: collectionid });
+      }
+    });
+  }
+
+  function deleteshare(req, res) {
+    const { shareid } = req.body;
+    console.log("shareid", req.body);
+
+    const deleteQuery = `
+      DELETE FROM share WHERE shareid=?`;
+  
+
+    db.query(deleteQuery, [shareid], (err, results) => {
+      if (err) {
+        console.error('Error delete from database: ', err);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        res.status(200).json({ message: 'Delete successfully'});
+      }
+    });
+  }
+
+  function deletecollect(req, res) {
+    const { shareid } = req.body;
+    console.log("shareid", req.body);
+
+    const deleteQuery = `
+      DELETE FROM collection WHERE shareid=?`;
+  
+
+    db.query(deleteQuery, [shareid], (err, results) => {
+      if (err) {
+        console.error('Error delete from database: ', err);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        res.status(200).json({ message: 'Delete successfully'});
+      }
+    });
+  }
   
   module.exports = {
     login,
     register,
     createExperience,
     incrementEnterTime,
+    getuserpage,
+    collect,
+    deleteshare,
+    deletecollect
   };
   
    
