@@ -28,6 +28,9 @@ app.get('/session', function(req, res){
 app.use('/user', require('./router/user'))
 app.use('/social', require('./router/social'))
 app.use('/comment', require('./router/comment'))
+app.use('/tag', require('./router/tag'))
+app.use('/plant', require('./router/plant'))
+app.use('/pest', require('./router/pest'))
 app.use('/uploads', express.static('uploads'));
 
 

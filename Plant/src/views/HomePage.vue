@@ -7,12 +7,24 @@
     <el-col :span="6"><div class="grid-content ep-bg-purple" /><el-icon color="lightgreen" size="100px"><Shop /></el-icon></el-col>
     
   </el-row>
-    <el-row :gutter="20">
-    <el-col :span="6"><div class="grid-content ep-bg-purple" />Have a good idea? Wanna Share with others? </el-col>
-    <el-col :span="6"><div class="grid-content ep-bg-purple" />Login and Share your Experience!</el-col>
-    <el-col :span="6"><div class="grid-content ep-bg-purple" />Go Social Page, See Everyone's Life!</el-col>
+  <el-row>
+  <el-col :span="6">
+    <div class="grid-content ep-bg-purple">
+      <p style="font-size: 16px; font-weight: bold;">Have a good idea? Wanna Share with others?</p>
+    </div>
+  </el-col>
+  <el-col :span="6">
+    <div class="grid-content ep-bg-purple">
+      <p style="font-size: 16px; font-weight: bold;">Login and Share your Experience!</p>
+    </div>
+  </el-col>
+  <el-col :span="6">
+    <div class="grid-content ep-bg-purple">
+      <p style="font-size: 16px; font-weight: bold;">Go Social Page, See Everyone's Life!</p>
+    </div>
+  </el-col>
+</el-row>
 
-  </el-row>
   </div>
   <div class="HotSocial">
     <h1>Hot Share : </h1><br/>
@@ -20,11 +32,11 @@
   </div>
   <div class="Plant">
     <h1>Find you Plant </h1><br/>
-    <plant></plant>
+    <Planttypecard></Planttypecard>
   </div>
   <div class="Pest">
     <h1>Pest Management: </h1><br/>
-    <pest></pest>
+    <pestcard></pestcard>
   </div>
   <div class="Supplier">
     <h1>Supplier : </h1><br/>
@@ -35,7 +47,9 @@
   
   <script setup>
   
+  import Planttypecard from '../components/content/plantcontent/planttypecard.vue';
   import Hotsocial from '../components/content/socialcontent/hotsocial.vue';
+  import pestcard from '../components/content/pestcontent/pestcard.vue';
   
   </script>
   

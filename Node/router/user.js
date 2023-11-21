@@ -22,4 +22,11 @@ router.post('/deleteshare', userControl.deleteshare);
 
 router.post('/deletecollect', userControl.deletecollect);
 
+router.post('/concern', userControl.concern);
+
+router.post('/deleteconcern', userControl.deleteconcern);
+
+
+router.get('/checkconcern/:userId/:concernuserId', userControl.checkconcern);
+
 module.exports = router;

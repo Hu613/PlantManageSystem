@@ -203,6 +203,62 @@ db.getConnection((err, connection) => {
       }
     });
   }
+
+  function concern(req, res) {
+    const { concernuserId ,userId } = req.body;
+    console.log("concernuserId and userId", req.body);
+    const concernid = uuid();
+
+    const insertQuery = `
+      INSERT INTO concern (concernid, userId, concernuserId)
+      VALUES (?, ?, ?)`;
+  
+
+    db.query(insertQuery, [concernid,userId, concernuserId], (err, results) => {
+      if (err) {
+        console.error('Error inserting into database: ', err);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        res.status(200).json({ message: 'Concern successfully', Concernid: concernid });
+      }
+    });
+  }
+
+  function deleteconcern(req, res) {
+    const { concernuserId } = req.body;
+    console.log("concernuserId", req.body);
+
+    const deleteQuery = `
+      DELETE FROM concern WHERE concernuserId=?`;
+  
+
+    db.query(deleteQuery, [concernuserId], (err, results) => {
+      if (err) {
+        console.error('Error delete from database: ', err);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        res.status(200).json({ message: 'Delete successfully'});
+      }
+    });
+  }
+
+  function checkconcern(req, res) {
+    const { userId, concernuserId } = req.params;
+    const query = `
+      SELECT COUNT(*) AS count
+      FROM concern
+      WHERE userId = ? AND concernuserId = ?`;
+  
+    db.query(query, [userId, concernuserId], (err, results) => {
+      if (err) {
+        console.error('Error querying database: ', err);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        const isConcerned = results[0].count > 0;
+        res.json({ isConcerned });
+      }
+    });
+  }
   
   module.exports = {
     login,
@@ -212,7 +268,10 @@ db.getConnection((err, connection) => {
     getuserpage,
     collect,
     deleteshare,
-    deletecollect
+    deletecollect,
+    concern,
+    deleteconcern,
+    checkconcern,
   };
   
    

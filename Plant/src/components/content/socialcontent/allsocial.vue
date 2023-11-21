@@ -59,6 +59,23 @@
 
     }
   };
+
+  const concern = async (shareid) => {
+    try {
+      const response = await axios.post('http://localhost:3000/user/collect', {
+       shareid: shareid,
+       userId: userId.value,
+      });
+     
+      alert('Collect successful');
+      console.log(response.data);
+      
+    } catch (error) {
+      alert('Collect failed');
+      console.error('Collect error:', error);
+
+    }
+  };
   onMounted(async () => {
     const userStr = localStorage.getItem('user');
     if (userStr) {
