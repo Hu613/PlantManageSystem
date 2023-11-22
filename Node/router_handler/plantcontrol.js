@@ -49,45 +49,51 @@ function getplant(req, res) {
   
   function getPlantPage(req, res) {
     const plantid = req.params.plantid;
-    console.log('plantid', req.params.plantid);
-    
-   
-    const query = `
-      SELECT p.plantid, p.plantname, p.description, p.planthelp, p.plantpicture, pe.pestid 
-      FROM plant p
-      JOIN pest pe ON p.pestid = pe.pestid
-      WHERE p.plantid = ?
-    `;
-  
-    db.query(query, [plantid], (err, results) => {
-      if (err) {
-        console.error('Error fetching share:', err);
-        res.status(500).json({ error: 'Internal server error' });
-      } else {
-        if (results.length > 0) {
-          const plant = results[0];
+    const plantQuery = `SELECT plantid, plantname, description, planthelp, plantpicture FROM plant WHERE plantid = ?`;
+    db.query(plantQuery, [plantid], (err, plantData) => {
+      const plant = plantData[0];
+      const pestQuery = `SELECT pe.pestid, pe.pestname, pe.pestpicture FROM plant_pest pp JOIN pest pe ON pe.pestid = pp.pestid WHERE pp.plantid = ?`;
+      db.query(pestQuery, [plantid], (err, pests) => {
+        if (err) {
+          res.status(500).json({ error: 'Database error in fetching plants' });
+          return;
+        }
           const plantData = {
             plantid: plant.plantid,
             plantname: plant.plantname,
             description: plant.description,
             planthelp: plant.planthelp,
             plantpicture: plant.plantpicture,
-            entertime: plant.entertime,
-            pestid: plant.pestid,
+            pests: pests
           };
-          console.log('plantData:', plantData);
-          res.json(plantData);
-         
-        } else {
-          res.status(404).json({ error: 'Cannot find share with the provided id' });
-        }
+          res.json(plantData); 
+        });
+    });
+  }
+
+  function incrementPlantEnterTime(req, res) {
+    const { plantid } = req.params; 
+  
+    const updateQuery = `
+      UPDATE plant SET entertime = entertime + 1 WHERE plantid = ?
+    `;
+  
+    db.query(updateQuery, [plantid], (err, results) => {
+      if (err) {
+        console.error('Error updating database: ', err);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        res.status(200).json({ message: 'Enter time incremented successfully' });
       }
     });
   }
+  
+
   module.exports = {
     getplant,
     incrementPlantEnterTime,
     getPlantPage,
+    incrementPlantEnterTime,
   };
   
    

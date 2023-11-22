@@ -8,5 +8,6 @@ router.get('/getplant', plantControl.getplant);
 
 router.get('/getPlantPage/:plantid', plantControl.getPlantPage);
 
+router.post('/incrementPlantEnterTime/:plantid/enter', plantControl.incrementPlantEnterTime);
 
 module.exports = router;

@@ -1,5 +1,4 @@
 const db = require('../common/db');
-const { uuid } = require('../common/uuid');
 
 db.getConnection((err, connection) => {
   if(err) {

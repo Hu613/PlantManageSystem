@@ -9,6 +9,9 @@ import UserPage from "../views/UserPage.vue"
 import Plant from "../views/Plant/Plant.vue"
 import PlantInfo from "../views/Plant/PlantInfo.vue"
 import PlantPage from "../views/Plant/PlantPage.vue"
+import PlanttypePage from "../views/Plant/PlanttypePage.vue"
+import Pest from "../views/Pest/Pest.vue"
+import PestPage from "../views/Pest/PestPage.vue"
 
 const routes = [
   {
@@ -41,6 +44,16 @@ const routes = [
   {
     path:"/PlantPage/:plantid",component: PlantPage
   },
+  {
+    path:"/PlanttypePage/:tagid",component: PlanttypePage
+  },
+  {
+    path:"/Pest",component: Pest
+  },
+  {
+    path:"/PestPage/:pestid",component: PestPage
+  },
+  
 ]  
   
   const router = createRouter({

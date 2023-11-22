@@ -16,7 +16,7 @@
             <div class="bottom">
               <span>{{ card.createtime }}</span>
               <el-button text class="button" @click="() => goSharepage(card.shareid)" size="large">Enter</el-button>
-              <el-button  class="button" @click="() => deleteshare(card.shareid)" type="warning" icon="Delete" size="large" circle></el-button>
+              <el-button  v-if="currentuser" class="button" @click="() => deleteshare(card.shareid)" type="warning" icon="Delete" size="large" circle></el-button>
             </div>
             <div class="description">Description:<br />
             <div class="description-text">{{ card.description }}</div>
@@ -32,6 +32,7 @@
   import axios from 'axios';
   import { useRouter } from 'vue-router';
   const router = useRouter();
+  const currentuser = ref(false);
   const props = defineProps({
   userId: String
   
@@ -61,6 +62,14 @@
   }
 };
   onMounted(async () => {
+    const userStr = localStorage.getItem('user');
+  if (userStr) {
+    const user = JSON.parse(userStr);
+    if(user.userId === props.userId){
+      currentuser.value = true;
+    }
+  }
+
     try {
       const response = await axios.get(`http://localhost:3000/social/getusersocial/${props.userId}`);
       cards.value = response.data.map(share => ({

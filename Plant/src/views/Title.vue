@@ -25,7 +25,7 @@
       <el-dropdown-menu>
         <el-dropdown-item command="a"><router-link to="/PlantInfo">Plant Info</router-link></el-dropdown-item>
         <el-dropdown-item command="b"><router-link to="/SuplierInfo">Suplier Info</router-link></el-dropdown-item>
-        <el-dropdown-item command="c"><router-link to="/PestHelp">Pest Help</router-link></el-dropdown-item>
+        <el-dropdown-item command="c"><router-link to="/Pest">Pest Help</router-link></el-dropdown-item>
         <el-dropdown-item command="d" disabled>placeholder</el-dropdown-item>
       </el-dropdown-menu>
     </template>

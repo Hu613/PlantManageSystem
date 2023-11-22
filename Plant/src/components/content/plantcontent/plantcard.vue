@@ -30,6 +30,7 @@
   
   const goPlantPage = async (plantid) => {
     try {
+      await axios.post(`http://localhost:3000/plant/incrementPlantEnterTime/${plantid}/enter`); 
       router.push(`/PlantPage/${plantid}`);
     } catch (error) {
       console.error('Can not enter this page', error);

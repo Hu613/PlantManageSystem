@@ -26,7 +26,8 @@ router.post('/concern', userControl.concern);
 
 router.post('/deleteconcern', userControl.deleteconcern);
 
-
 router.get('/checkconcern/:userId/:concernuserId', userControl.checkconcern);
+
+router.get('/getUserConcern/:userId', userControl.getUserConcern);
 
 module.exports = router;

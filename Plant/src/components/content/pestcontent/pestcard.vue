@@ -28,10 +28,9 @@
   const cards = ref([]);
   
   
-  const goPlantPage = async (shareid) => {
+  const goPestPage = async (pestid) => {
     try {
-      await axios.post(`http://localhost:3000/user/incrementPlantEnterTime/${plantid}/enter`); 
-      router.push(`/SharePage/${shareid}`);
+      router.push(`/PestPage/${pestid}`);
     } catch (error) {
       console.error('Can not enter this page', error);
     }

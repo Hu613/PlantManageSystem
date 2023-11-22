@@ -11,7 +11,7 @@
         <div style="padding: 14px">
           <span>{{ card.title }}</span> 
           <div class="bottom">
-           
+            <el-button text class="button" @click="() => goPlanttypePage(card.tagid)" size="large">Enter</el-button>
           </div> 
         </div>
       </el-card>
@@ -26,15 +26,13 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const cards = ref([]);
 
-
-const goPlantpage = async (shareid) => {
-  try {
-    await axios.post(`http://localhost:3000/user/incrementEnterTime/${shareid}/enter`); 
-    router.push(`/SharePage/${shareid}`);
-  } catch (error) {
-    console.error('Can not enter this page', error);
+const goPlanttypePage = async (tagid) => {
+    try {
+      router.push(`/PlanttypePage/${tagid}`);
+    } catch (error) {
+      console.error('Can not enter this page', error);
+    }
   }
-}
 
 
 onMounted(async () => {

@@ -88,6 +88,8 @@ const contentForm = reactive({
     const response = await axios.post('http://localhost:3000/user/concern', {
       userId: userId.value,
       concernuserId: concernedUserId,
+      concernusername: shareData.value.username,
+      concernuseravatar: shareData.value.useravatar,
     });
     console.log('Concern successful:', response.data);
     value1.value = true;

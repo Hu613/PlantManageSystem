@@ -4,6 +4,8 @@
     
   <router-link to="/">HomePage<el-icon size="large"><house /></el-icon></router-link>
   <router-link v-if="userId" :to="`/UserPage/${userId}`">MyPage<el-icon size="large"><Notification /></el-icon></router-link>
+  <userconcern v-if="userId"></userconcern>
+  <planttypetag></planttypetag>
  </el-space>
 </div>
  </template>
@@ -11,12 +13,12 @@
  <script lang="ts" setup>
    import { ref, onMounted } from 'vue';
    import { useRouter } from 'vue-router';
- 
+   import userconcern from "../components/content/Usercontent/userconcern.vue"
+   import planttypetag from '../components/content/plantcontent/planttypetag.vue';
   const isLoggedIn = ref(false);
    const username = ref('');
    const userAvatar = ref(''); 
    const userId = ref('');
-   const router = useRouter();
    
    
    onMounted(() => {

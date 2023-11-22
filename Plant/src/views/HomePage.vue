@@ -40,7 +40,7 @@
   </div>
   <div class="Supplier">
     <h1>Supplier : </h1><br/>
-    <Supplier></Supplier>
+    <suppliercard></suppliercard>
   </div>
 
   </template>
@@ -50,7 +50,7 @@
   import Planttypecard from '../components/content/plantcontent/planttypecard.vue';
   import Hotsocial from '../components/content/socialcontent/hotsocial.vue';
   import pestcard from '../components/content/pestcontent/pestcard.vue';
-  
+  import suppliercard from '../components/content/suppliercontent/suppliercard.vue';
   </script>
   
   <style scoped>

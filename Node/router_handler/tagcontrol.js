@@ -1,5 +1,4 @@
 const db = require('../common/db');
-const { uuid } = require('../common/uuid');
 
 db.getConnection((err, connection) => {
   if(err) {
@@ -32,10 +31,54 @@ function gettag(req, res) {
     });
   }
 
+  function getPlanttypePage(req, res) {
+    const tagid = req.params.tagid;
+  
+    const tagQuery = `SELECT tagid, title, description, adviselink, tagpicture FROM tag WHERE tagid = ?`;
+    db.query(tagQuery, [tagid], (err, tagData) => {
+      const tag = tagData[0];
+      const plantQuery = `
+        SELECT p.plantid, p.plantname, p.plantpicture
+        FROM tag_plant tp 
+        JOIN plant p ON p.plantid = tp.plantid
+        WHERE tp.tagid = ?`;
+      db.query(plantQuery, [tagid], (err, plants) => {
+        if (err) {
+          res.status(500).json({ error: 'Database error in fetching plants' });
+          return;
+        }
+  
+        const supplierQuery = `
+          SELECT s.supplierid, s.suppliername, s.description, s.supplierlink
+          FROM tag_supplier ts
+          JOIN supplier s ON s.supplierid = ts.supplierid
+          WHERE ts.tagid = ?`;
+        db.query(supplierQuery, [tagid], (err, supplierResults) => {
+          if (err) {
+            res.status(500).json({ error: 'Database error in fetching suppliers' });
+            return;
+          }
+  
+          const tagData = {
+            tagid: tag.tagid,
+            title: tag.title,
+            description: tag.description,
+            adviselink: tag.adviselink,
+            tagpicture: tag.tagpicture,
+            plants: plants,
+            suppliers: supplierResults
+          };
+          res.json(tagData);
+        });
+      });
+    });
+  }
+  
   
 
   module.exports = {
     gettag,
+    getPlanttypePage,
   };
   
    

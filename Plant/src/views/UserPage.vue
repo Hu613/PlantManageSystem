@@ -20,7 +20,7 @@
   
   
   <script setup>
-  import { ref, onMounted, reactive } from 'vue';
+  import { ref, onMounted } from 'vue';
   import axios from 'axios';
   import { useRoute } from 'vue-router';
   import usersocial from '../components/content/socialcontent/usersocial.vue';

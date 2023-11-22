@@ -31,6 +31,7 @@ app.use('/comment', require('./router/comment'))
 app.use('/tag', require('./router/tag'))
 app.use('/plant', require('./router/plant'))
 app.use('/pest', require('./router/pest'))
+app.use('/supplier', require('./router/supplier'))
 app.use('/uploads', express.static('uploads'));
 
 

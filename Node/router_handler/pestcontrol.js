@@ -33,42 +33,50 @@ function getpest(req, res) {
   }
   
   function getPestPage(req, res) {
-    const plantid = req.params.plantid;
-    console.log('plantid', req.params.plantid);
-    
-   
-    const query = `
-      SELECT p.plantid, p.plantname, p.description, p.planthelp, p.plantpicture, pe.pestid 
-      FROM plant p
-      JOIN pest pe ON p.pestid = pe.pestid
-      WHERE p.plantid = ?
-    `;
+    const pestid = req.params.pestid;
   
-    db.query(query, [plantid], (err, results) => {
-      if (err) {
-        console.error('Error fetching share:', err);
-        res.status(500).json({ error: 'Internal server error' });
-      } else {
-        if (results.length > 0) {
-          const plant = results[0];
-          const plantData = {
-            plantid: plant.plantid,
-            plantname: plant.plantname,
-            description: plant.description,
-            planthelp: plant.planthelp,
-            plantpicture: plant.plantpicture,
-            entertime: plant.entertime,
-            pestid: plant.pestid,
-          };
-          console.log('plantData:', plantData);
-          res.json(plantData);
-         
-        } else {
-          res.status(404).json({ error: 'Cannot find share with the provided id' });
+    const pestQuery = `SELECT pestid, pestname, description, pestcontrol, prevention, pestpicture FROM pest WHERE pestid = ?`;
+    db.query(pestQuery, [pestid], (err, pestData) => {
+      const pest = pestData[0];
+      const supplierQuery = `
+        SELECT s.supplierid, s.suppliername, s.description, s.supplierlink
+        FROM pest_supplier ps 
+        JOIN supplier s ON s.supplierid = ps.supplierid
+        WHERE ps.pestid = ?`;
+      db.query(supplierQuery, [pestid], (err, suppliers) => {
+        if (err) {
+          res.status(500).json({ error: 'Database error in fetching suppliers' });
+          return;
         }
-      }
+
+        const plantQuery = `
+          SELECT p.plantid, p.plantname, p.plantpicture
+          FROM plant_pest pp
+          JOIN plant p ON p.plantid = pp.plantid
+          WHERE pp.pestid = ?`;
+        db.query(plantQuery, [pestid], (err, plants) => {
+          if (err) {
+            res.status(500).json({ error: 'Database error in fetching plants' });
+            return;
+          }
+  
+          const pestData = {
+            pestid: pest.pestid,
+            pestname: pest.pestname,
+            description: pest.description,
+            pestcontrol: pest.pestcontrol,
+            prevention: pest.prevention,
+            pestpicture: pest.pestpicture,
+            plants: plants,
+            suppliers: suppliers
+          };
+          res.json(pestData);
+          console.log(pestData);
+        });
+      });
     });
   }
+
   module.exports = {
     getpest,
     getPestPage,

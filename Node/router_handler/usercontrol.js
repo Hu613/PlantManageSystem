@@ -205,16 +205,16 @@ db.getConnection((err, connection) => {
   }
 
   function concern(req, res) {
-    const { concernuserId ,userId } = req.body;
+    const { concernuserId ,userId, concernusername, concernuseravatar } = req.body;
     console.log("concernuserId and userId", req.body);
     const concernid = uuid();
 
     const insertQuery = `
-      INSERT INTO concern (concernid, userId, concernuserId)
-      VALUES (?, ?, ?)`;
+      INSERT INTO concern (concernid, userId, concernuserId, concernusername, concernuseravatar)
+      VALUES (?, ?, ?, ?, ?)`;
   
 
-    db.query(insertQuery, [concernid,userId, concernuserId], (err, results) => {
+    db.query(insertQuery, [concernid,userId, concernuserId, concernusername, concernuseravatar], (err, results) => {
       if (err) {
         console.error('Error inserting into database: ', err);
         res.status(500).json({ error: 'Internal server error' });
@@ -259,6 +259,22 @@ db.getConnection((err, connection) => {
       }
     });
   }
+
+  function getUserConcern(req, res) {
+    const { userId } = req.params;
+    console.log('userId',userId);
+    const concernQuery = `SELECT c.concernid, c.concernuserId, c.concernusername, c.concernuseravatar FROM user_concern uc JOIN concern c ON uc.concernid = c.concernid WHERE uc.id = ?`;
+    db.query(concernQuery, [userId], (err, concerns) => {
+      if (err) {
+        res.status(500).json({ error: 'Database error in fetching concerns' });
+        return;
+      }
+      res.json({ concerns });
+      console.log('concernuserdata', concerns);
+    });
+  }
+
+  
   
   module.exports = {
     login,
@@ -272,6 +288,7 @@ db.getConnection((err, connection) => {
     concern,
     deleteconcern,
     checkconcern,
+    getUserConcern,
   };
   
    
