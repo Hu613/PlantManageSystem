@@ -31,6 +31,8 @@ function getplant(req, res) {
       }
     });
   }
+
+  
   function incrementPlantEnterTime(req, res) {
     const { plantid } = req.params; 
   

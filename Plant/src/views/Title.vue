@@ -5,10 +5,7 @@
         <input type="search" v-model="searchcontent" placeholder="Google Search" />
         <el-button circle @click="googlesearch"><el-icon><ChromeFilled /></el-icon></el-button>
       </form>
-      <form @submit.prevent="pagesearch" class="pagesearchbar">
-        <input type="search" v-model="pagesearchcontent" placeholder="Find what you want" />
-        <el-button :icon="Search" circle @click="pagesearch"></el-button>
-      </form>
+      <el-button :icon="Search" circle @click="goSearchPage"></el-button>
       <user></user>
     </div>
     <div class="top-SecondLine">
@@ -47,13 +44,16 @@ import { Search } from '@element-plus/icons-vue';
 import { ChromeFilled } from '@element-plus/icons-vue'
 import User from "../components/content/Usercontent/user.vue"; 
 
+const router=useRouter();
 const searchcontent = ref('');
-const pagesearchcontent = ref(''); 
-const router = useRouter();
 
-function pagesearch() {
-  
-}
+const goSearchPage = async () => {
+    try {
+      router.push(`/SearchPage`);
+    } catch (error) {
+      console.error('Can not enter this page', error);
+    }
+  }
 
 function googlesearch() {
   const content = searchcontent.value.trim();

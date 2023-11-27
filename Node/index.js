@@ -32,6 +32,10 @@ app.use('/tag', require('./router/tag'))
 app.use('/plant', require('./router/plant'))
 app.use('/pest', require('./router/pest'))
 app.use('/supplier', require('./router/supplier'))
+app.use('/garden', require('./router/garden'))
+app.use('/search', require('./router/search'))
+app.use('/gardencard', require('./router/gardencard'))
+
 app.use('/uploads', express.static('uploads'));
 
 

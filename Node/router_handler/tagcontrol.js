@@ -38,7 +38,7 @@ function gettag(req, res) {
     db.query(tagQuery, [tagid], (err, tagData) => {
       const tag = tagData[0];
       const plantQuery = `
-        SELECT p.plantid, p.plantname, p.plantpicture
+        SELECT p.plantid, p.plantname, p.plantpicture, p.userplantpicture
         FROM tag_plant tp 
         JOIN plant p ON p.plantid = tp.plantid
         WHERE tp.tagid = ?`;

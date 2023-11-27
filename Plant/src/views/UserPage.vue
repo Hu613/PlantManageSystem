@@ -5,7 +5,7 @@
    
       <div class="garden">
         <h1>My Garden :</h1><br/>
-       <MyGarden></MyGarden>
+       <usergardencard :userId="userId"></usergardencard>
       </div>
       <div class="share">
         <h1>My Share :</h1><br/>
@@ -25,6 +25,7 @@
   import { useRoute } from 'vue-router';
   import usersocial from '../components/content/socialcontent/usersocial.vue';
   import usercollect from '../components/content/Usercontent/usercollect.vue';
+  import usergardencard from './Garden/usergardencard.vue';
 
   
   const route = useRoute();

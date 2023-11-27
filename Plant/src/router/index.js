@@ -12,6 +12,8 @@ import PlantPage from "../views/Plant/PlantPage.vue"
 import PlanttypePage from "../views/Plant/PlanttypePage.vue"
 import Pest from "../views/Pest/Pest.vue"
 import PestPage from "../views/Pest/PestPage.vue"
+import GardenPage from "../views/Garden/GardenPage.vue"
+import SearchPage from "../views/SearchPage.vue"
 
 const routes = [
   {
@@ -53,6 +55,12 @@ const routes = [
   {
     path:"/PestPage/:pestid",component: PestPage
   },
+  {
+    path:"/GardenPage/:gardenid",component: GardenPage
+  },
+  {
+    path:"/SearchPage",component: SearchPage
+  }
   
 ]  
   

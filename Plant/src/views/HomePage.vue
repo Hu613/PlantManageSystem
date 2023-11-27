@@ -54,9 +54,7 @@
   </script>
   
   <style scoped>
-  .shareguide{
-    background-color: white;
-  }
+ 
   .el-row {
   margin-bottom: 20px;
 }

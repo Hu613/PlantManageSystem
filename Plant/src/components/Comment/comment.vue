@@ -13,7 +13,7 @@
   <script setup>
 import { ref, onMounted, defineProps } from 'vue';
 import axios from 'axios';
-import { ElRow, ElCol, ElAvatar } from 'element-plus';
+
 
 const props = defineProps({
   pageId: String

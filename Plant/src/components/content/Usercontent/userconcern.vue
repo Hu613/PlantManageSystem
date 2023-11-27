@@ -4,8 +4,8 @@
         <el-collapse-item title="Consistency" name="1">
           <el-divider />
           <el-table :data="concerns" style="width: 100%">
-    <el-table-column prop="concernusername" label="Name" width="180" />
-    <el-table-column prop="concernuseravatar" label="Avatar" width="180">
+    <el-table-column prop="concernusername" label="Name" width="75" />
+    <el-table-column prop="concernuseravatar" label="Avatar" width="75">
       <template #default="scope">
         <img :src="scope.row.concernuseravatar" alt="Avatar" style="width: 50px; height: 50px;" @click="() => goUserPage(scope.row.concernuserId)"/>
       </template>
