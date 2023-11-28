@@ -26,7 +26,7 @@ const golink = (supplierlink) =>{
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:3000/supplier/getsupplier');
+    const response = await axios.get('http://localhost:3000/supplier/getplanttypesupplier');
     cards.value = response.data.map(supplier => ({
       ...supplier,
       

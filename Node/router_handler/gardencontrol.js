@@ -58,7 +58,7 @@ function createGarden(req, res) {
     const gardenId = req.params.gardenid;
   
     const query = `
-      SELECT gc.gardencardid, gc.plantid, gc.position, p.plantname, p.userplantpicture
+      SELECT gc.gardencardid, gc.plantid, gc.position, p.plantname, p.userplantpicture,p.planthelp
       FROM gardencard gc
       LEFT JOIN plant p ON gc.plantid = p.plantid
       WHERE gc.gardenid = ?`;
@@ -75,6 +75,7 @@ function createGarden(req, res) {
         plantid: row.plantid,
         plantname: row.plantname,
         userplantpicture: row.userplantpicture,
+        planthelp: row.planthelp,
         position: row.position
       }));
   

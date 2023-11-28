@@ -8,7 +8,6 @@
           <div style="padding: 14px">
             <span>{{ card.plantname || 'Select a plant' }}</span>
             <el-button  @click="() => openChangeDialog(index)" size="large">Change</el-button>
-            <el-button  @click="() => openSchedule(index)" size="large">Plant Schedule</el-button>
           </div>
         </el-card>
       </el-col>
@@ -102,8 +101,8 @@ onMounted(async () => {
       const foundCard = fetchedCards.find(card => card.position == index);
       return foundCard ? {
         ...foundCard,
-        userplantpicture: foundCard.userplantpicture || 'test.png',
-        plantname: foundCard.plantname || 'Select a plant'
+        userplantpicture: foundCard.userplantpicture,
+        plantname: foundCard.plantname
       } : {
         plantid: null,
         plantname: 'Select a plant',

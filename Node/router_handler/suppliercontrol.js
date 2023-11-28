@@ -32,8 +32,59 @@ function getsupplier(req, res) {
     });
   }
   
+  function getplantkitsupplier(req, res) {
+    const query = `SELECT supplierid, suppliername, LEFT(description, 30) as description, supplierlink FROM supplier WHERE suppliertype = 'plantkit'`;
+    db.query(query, (err, results) => {
+      if (err) {
+        console.error('Error fetching supplier: ', err);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+      
+        const supplier = results.map(supplier => ({
+          ...supplier
+        }));
+        res.json(supplier);
+    
+      }
+    });
+  }
+  function getpestsupplier(req, res) {
+    const query = `SELECT supplierid, suppliername, LEFT(description, 30) as description, supplierlink FROM supplier WHERE suppliertype = 'pest'`;
+    db.query(query, (err, results) => {
+      if (err) {
+        console.error('Error fetching supplier: ', err);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+      
+        const supplier = results.map(supplier => ({
+          ...supplier
+        }));
+        res.json(supplier);
+    
+      }
+    });
+  }
+  function getplanttypesupplier(req, res) {
+    const query = `SELECT supplierid, suppliername, LEFT(description, 30) as description, supplierlink FROM supplier WHERE suppliertype = 'planttype'`;
+    db.query(query, (err, results) => {
+      if (err) {
+        console.error('Error fetching supplier: ', err);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+      
+        const supplier = results.map(supplier => ({
+          ...supplier
+        }));
+        res.json(supplier);
+    
+      }
+    });
+  }
   module.exports = {
     getsupplier,
+    getplanttypesupplier,
+    getpestsupplier,
+    getplantkitsupplier
   };
   
    

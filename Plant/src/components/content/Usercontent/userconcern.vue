@@ -7,7 +7,7 @@
     <el-table-column prop="concernusername" label="Name" width="75" />
     <el-table-column prop="concernuseravatar" label="Avatar" width="75">
       <template #default="scope">
-        <img :src="scope.row.concernuseravatar" alt="Avatar" style="width: 50px; height: 50px;" @click="() => goUserPage(scope.row.concernuserId)"/>
+        <img :src="scope.row.concernuseravatar" alt="Avatar" style="width: 50px; height: 50px; cursor: pointer;" @click="() => goUserPage(scope.row.concernuserId)"/>
       </template>
     </el-table-column>
   </el-table>

@@ -6,19 +6,19 @@
     </form>
     <div class="share">
       <h1>Experience :</h1><br/>
-      <div v-for="share in searchResults.shares" :key="share.shareid" @click="goToSharePage(share.shareid)">
+      <div v-for="share in searchResults.shares" style="cursor: pointer;" :key="share.shareid" @click="goToSharePage(share.shareid)">
         {{ share.title }}
       </div>
     </div>
     <div class="user">
       <h1>User :</h1><br/>
-      <div v-for="user in searchResults.users" :key="user.userId" @click="goToUserPage(user.id)">
+      <div v-for="user in searchResults.users" style="cursor: pointer;" :key="user.userId" @click="goToUserPage(user.id)">
         {{ user.username }}
       </div>
     </div>
     <div class="plant">
       <h1>Plant :</h1><br/>
-      <div v-for="plant in searchResults.plants" :key="plant.plantId" @click="goToPlantPage(plant.plantid)">
+      <div v-for="plant in searchResults.plants" style="cursor: pointer;" :key="plant.plantId" @click="goToPlantPage(plant.plantid)">
         {{ plant.plantname }}
       </div>
     </div>

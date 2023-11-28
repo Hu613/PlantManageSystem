@@ -21,9 +21,8 @@
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item command="a"><router-link to="/PlantInfo">Plant Info</router-link></el-dropdown-item>
-        <el-dropdown-item command="b"><router-link to="/SuplierInfo">Suplier Info</router-link></el-dropdown-item>
+        <el-dropdown-item command="b"><router-link to="/Supplier">Supplier Info</router-link></el-dropdown-item>
         <el-dropdown-item command="c"><router-link to="/Pest">Pest Help</router-link></el-dropdown-item>
-        <el-dropdown-item command="d" disabled>placeholder</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
@@ -32,7 +31,23 @@
     </div>
    
     <div class="top-right">
-      
+      <el-button text @click="dialogVisible = true">
+    click to open the Dialog
+  </el-button>
+
+  <el-dialog
+    v-model="dialogVisible"
+    title="Tips"
+    width="30%"
+  >
+    
+    <template #footer>
+      <span class="dialog-footer">
+        <Logintest></Logintest>
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+      </span>
+    </template>
+  </el-dialog>
     </div>
   </div>
 </template>
@@ -43,9 +58,12 @@ import { useRouter } from 'vue-router';
 import { Search } from '@element-plus/icons-vue';
 import { ChromeFilled } from '@element-plus/icons-vue'
 import User from "../components/content/Usercontent/user.vue"; 
-
+import { ElMessageBox } from 'element-plus';
+import Logintest from "../views/Logintest.vue";
 const router=useRouter();
 const searchcontent = ref('');
+const dialogVisible = ref(false)
+
 
 const goSearchPage = async () => {
     try {

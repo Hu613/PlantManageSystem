@@ -14,6 +14,7 @@ import Pest from "../views/Pest/Pest.vue"
 import PestPage from "../views/Pest/PestPage.vue"
 import GardenPage from "../views/Garden/GardenPage.vue"
 import SearchPage from "../views/SearchPage.vue"
+import Supplier from "../views/Supplier/Supplier.vue"
 
 const routes = [
   {
@@ -60,11 +61,13 @@ const routes = [
   },
   {
     path:"/SearchPage",component: SearchPage
-  }
-  
+  },
+  {
+    path:"/Supplier",component: Supplier
+  },
 ]  
   
-  const router = createRouter({
+const router = createRouter({
 history:createWebHashHistory(),
 routes
   })
