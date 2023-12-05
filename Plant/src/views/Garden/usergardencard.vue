@@ -45,6 +45,7 @@
     });
    
     alert('Delete successful');
+    location.reload();
     console.log(response.data);
     
   } catch (error) {

@@ -1,7 +1,6 @@
 <template>
     <div class="register-form">
-      <div class="Webpicture"><img src="./webpicture.png" /></div>
-      <el-form :label-position="labelPosition" label-width="100px" :model="formLabelAlign" style="max-width: 460px">
+      <el-form :label-position="labelPosition" label-width="100px" :model="formLabelAlign" style="max-width: 460px" class="form-container">
         <el-form-item label="Name">
           <el-input v-model="formLabelAlign.name" />
         </el-form-item>
@@ -19,7 +18,7 @@
         </el-form-item>
         <el-form-item label="Avatar">
 
-          <input type="file" @change="handleFileUpload"/>
+          <input type="file" @change="handleFileUpload" class="file-input"/>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm">Register</el-button>
@@ -78,4 +77,37 @@
     }
   };
   </script>
+
+  <style scoped>
+  .register-form {
+    padding: 20px;
+    background-image: url('./webpicture.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .form-container {
+    margin-top: 20px;
+  }
+  
+  .file-input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .el-button {
+    background-color: #2c662d;
+    color: white;
+  }
+  
+  .el-button:hover {
+    background-color: #3a8039;
+  }
+  </style>
   

@@ -1,18 +1,9 @@
 <template>
     <div class="demo-collapse">
-      <el-collapse v-model="activeNames" @change="handleChange">
-        <el-collapse-item title="Consistency" name="1">
-          <el-divider />
-          <el-table :data="concerns" style="width: 100%">
-    <el-table-column prop="concernusername" label="Name" width="75" />
-    <el-table-column prop="concernuseravatar" label="Avatar" width="75">
-      <template #default="scope">
-        <img :src="scope.row.concernuseravatar" alt="Avatar" style="width: 50px; height: 50px; cursor: pointer;" @click="() => goUserPage(scope.row.concernuserId)"/>
-      </template>
-    </el-table-column>
-  </el-table>
-        </el-collapse-item>
-      </el-collapse>
+         <div v-for="concerns in concerns">
+        <img :src="concerns.concernuseravatar" alt="Avatar" style="width: 50px; height: 50px; cursor: pointer; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0.2);" @click="() => goUserPage(concerns.concernuserId)"/>
+        <span style="font-size: 25px; color: black;">{{ concerns.concernusername }}</span>
+      </div>
     </div>
   </template>
   

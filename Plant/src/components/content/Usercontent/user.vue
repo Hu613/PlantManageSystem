@@ -1,8 +1,22 @@
 <template>
-    <div>
-      <div v-if="!userId" class="user-info">
-        <router-link to="/Register">Register</router-link>
-        <router-link to="/Login">Login</router-link>
+    <div class="usercontent">
+      <div v-if="!userId" class="user-actions">
+        <router-link to="/Register" class="user-link">Register</router-link>
+        <el-button class="user-link" @click="dialogVisible = true">
+    Login
+  </el-button>
+
+  <el-dialog
+    v-model="dialogVisible"
+    title="Tips"
+    width="30%">
+    <template #footer>
+      <span class="dialog-footer">
+        <Logintest></Logintest>
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+      </span>
+    </template>
+  </el-dialog>
       </div>
   
       <div v-if="userId" class="user-info">
@@ -12,10 +26,10 @@
 
     </span>
     <template #dropdown>
-      <el-dropdown-menu>
-        <el-dropdown-item command="a" style="text-align: center; font-size: 30px;">{{ username }}</el-dropdown-item>
-        <el-dropdown-item command="b"><router-link :to="`/UserPage/${userId}`">My Page<el-icon size="large"><User /></el-icon></router-link></el-dropdown-item>
-        <el-button type="primary" @click="openCreateGardenDialog">Create Garden</el-button>
+      <el-dropdown-menu class="dropdown-menu">
+        <el-dropdown-item command="a" class="dropdown-username">{{ username }}</el-dropdown-item>
+        <el-dropdown-item command="b"><router-link class="dropdown-link" :to="`/UserPage/${userId}`">My Page<el-icon size="large"><User /></el-icon></router-link></el-dropdown-item>
+        <el-button @click="openCreateGardenDialog" class="create-garden-button">Create Garden</el-button>
         <el-dialog v-model="createDialogVisible" title="Create Garden" width="30%">
         <el-input v-model="gardenName" placeholder="Enter garden name"></el-input>
         <span class="dialog-footer">
@@ -23,8 +37,8 @@
         <el-button type="primary" @click="createGarden">Confirm</el-button>
       </span>
     </el-dialog>
-        <el-dropdown-item command="d" disabled><router-link to="/CreateExperience">Share Experience<el-icon size="large"><MagicStick /></el-icon></router-link></el-dropdown-item>
-        <el-dropdown-item command="e" divided><el-button type="danger"  @click="logout">Logout<el-icon size="large"><RemoveFilled /></el-icon></el-button></el-dropdown-item>
+        <el-dropdown-item command="d" disabled><router-link to="/CreateExperience" class="share-content">Share Experience<el-icon size="large"><MagicStick /></el-icon></router-link></el-dropdown-item>
+        <el-dropdown-item command="e" divided><el-button type="danger"  @click="logout" class="logout-button">Logout<el-icon size="large"><RemoveFilled /></el-icon></el-button></el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
@@ -37,6 +51,7 @@
   import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
   import axios from 'axios';
+  import Logintest from "../Usercontent/Logintest.vue";
   const dialogVisible = ref(false)
   const isLoggedIn = ref(false);
   const username = ref('');
@@ -50,6 +65,7 @@
     localStorage.removeItem('user');
     isLoggedIn.value = false;
     router.push('/');
+    location.reload();
     
   }
 
@@ -64,6 +80,7 @@ const createGarden = async () => {
       userId: userId.value
     });
     alert('Garden created successfully');
+    location.reload();
     createDialogVisible.value = false;
   } catch (error) {
     alert('Failed to create garden');
@@ -84,16 +101,43 @@ const createGarden = async () => {
   });
   </script>
   
-  <style scoped>
-  .user-info {
+<style scoped>
+  .usercontent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+
+  }
+  
+  .dropdown-menu{
+    background-color: #f4f4f4;
+  }
+  .user-actions, .user-info {
     display: flex;
     align-items: center;
   }
-  .user-avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+  
+  .user-link {
     margin-right: 10px;
+    font-size: 16px;
+    color: #4caf50;
+  }
+  
+  .user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .dropdown-username, .dropdown-link, .share-content{
+    font-size: 16px;
+    color: #4caf50;
+  }
+  
+  .create-garden-button {
+    margin-top: 10px;
+    color: #4caf50;
   }
 
 

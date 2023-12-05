@@ -1,7 +1,8 @@
 <template>
-    <div>
-      <h1 class="user"><img :src="userData.useravatar" class="user-avatar"></h1>
-<h2>{{ userData.username }}</h2>
+    <div class="user-page">
+      <h1 class="user">
+        <img :src="userData.useravatar" class="user-avatar"></h1>
+        <h2 class="user-name">{{ userData.username }}</h2>
    
       <div class="garden">
         <h1>My Garden :</h1><br/>
@@ -11,7 +12,7 @@
         <h1>My Share :</h1><br/>
         <usersocial :userId="userId"></usersocial>
       </div>
-      <div class="Collect">
+      <div class="collect">
         <h1>My Collect :</h1><br/>
        <usercollect :userId="userId"></usercollect>
       </div>
@@ -47,34 +48,38 @@
 });
   
   </script>
-  <style>
-  .title {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  .user-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  .user-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  .pictures {
-    margin-bottom: 10px;
-  }
-  .share-picture {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .description {
-    margin-bottom: 10px;
-  }
-  .button {
-    margin-bottom: 10px;
-  }
+  <style scoped>
+  .user-page {
+  padding: 20px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.user-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+  border: 2px solid #2c662d;
+}
+
+.user-name {
+  font-size: 24px;
+  color: #2c662d;
+}
+
+.garden, .share, .collect {
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 22px;
+  color: #2c662d;
+  margin-bottom: 15px;
+}
   </style>
   

@@ -1,7 +1,7 @@
 <template>
     <div class="comment-section">
       <el-row v-for="comment in comments" :key="comment.id" class="comment-item">
-        <el-avatar :src="comment.useravatar" size="large"></el-avatar>
+        <el-avatar class="useravatar" :src="comment.useravatar" size="large" @click="() => goUserPage(comment.userId)"></el-avatar>
         <el-col :span="18" class="comment-content">
           <div class="comment-username">{{ comment.username }}</div>
           <div class="comment-text">{{ comment.content }}</div>
@@ -13,7 +13,14 @@
   <script setup>
 import { ref, onMounted, defineProps } from 'vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+
+const goUserPage = (userId) => {
+    router.push(`/UserPage/${userId}`);
+    
+  };
 
 const props = defineProps({
   pageId: String
@@ -39,6 +46,9 @@ onMounted(async () => {
 
   
   <style scoped>
+  .useravatar{
+    cursor: pointer;
+  }
   .comment-section {
     margin-top: 20px;
   }

@@ -11,7 +11,7 @@ function search(req, res) {
 
     try {
 
-        db.query('SELECT id, username FROM user WHERE username LIKE ?', [`%${query}%`], (err, userResults) => {
+        db.query('SELECT id, username, useravatar FROM user WHERE username LIKE ?', [`%${query}%`], (err, userResults) => {
             if (err) throw err;
             searchResults.users = userResults;
             console.log(userResults);
@@ -21,7 +21,7 @@ function search(req, res) {
                 searchResults.shares = shareResults;
                console.log(shareResults);
          
-                db.query('SELECT plantid, plantname FROM plant WHERE plantname LIKE ?', [`%${query}%`], (err, plantResults) => {
+                db.query('SELECT plantid, plantname, plantpicture FROM plant WHERE plantname LIKE ?', [`%${query}%`], (err, plantResults) => {
                     if (err) throw err;
                     searchResults.plants = plantResults;
 
