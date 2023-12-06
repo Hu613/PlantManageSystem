@@ -14,7 +14,6 @@
 
   const userId = ref('');
   const concerns = ref([]);
-  const activeNames = ref(['1']);
   const router = useRouter();
   
   const goUserPage = (concernuserId) => {
@@ -37,9 +36,6 @@
       }
     }
   });
-  
-  const handleChange = (val) => {
-    console.log(val);
-  }
+
   </script>
   

@@ -7,7 +7,7 @@
     <div class="result">
       <h1>Experience :</h1><br/>
       <div class="resultcard">
-      <div v-for="share in searchResults.shares" class="card" style="cursor: pointer;" :key="share.shareid" @click="goToSharePage(share.shareid)">
+      <div v-for="share in searchResults.shares" class="textcard" style="cursor: pointer;" :key="share.shareid" @click="goToSharePage(share.shareid)">
         {{ share.title }}
       </div>
       </div>
@@ -100,7 +100,6 @@ const goToPlantPage = (plantid) => {
 }
 
 .card {
-  background-color: #e7f4e4;
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -108,18 +107,30 @@ const goToPlantPage = (plantid) => {
 }
 
 .card:hover {
-  background-color: #d0e8d3;
   transform: translateY(-10px);
 }
 
+.textcard {
+  background-color: #e7f4e4;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.textcard:hover {
+  background-color: #d0e8d3;
+  transform: translateY(-10px);
+}
 .name{
-  font-size: 16px;
+  font-size: 25px;
   text-align: center;
 }
 
 .avatar {
   width: 150px; 
   height: 150px; 
+  border-radius: 50%;
 }
 
 </style>
