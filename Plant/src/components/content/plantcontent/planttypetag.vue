@@ -1,6 +1,6 @@
 <template>
  <div class="tag">
-    <el-tag v-for="tag in tags" :key="tag.tagid" class="ml-2" style="cursor: pointer" type="success" @click="() => goPlanttypePage(tag.tagid)">
+    <el-tag v-for="tag in tags" :key="tag.tagid" class="ml-2" style="cursor: pointer; font-size: 25px;" type="success" @click="() => goPlanttypePage(tag.tagid)">
       {{ tag.title }}
     </el-tag>
   </div>

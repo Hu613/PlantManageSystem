@@ -108,7 +108,9 @@ onMounted(async () => {
   text-overflow: ellipsis; 
 }
 .share-picture {
-  width: 100%;
+  width: 100px;
+  height: 100px;
+ 
   display: block;
 }
 

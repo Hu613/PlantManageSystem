@@ -34,7 +34,7 @@ function gettag(req, res) {
   function getPlanttypePage(req, res) {
     const tagid = req.params.tagid;
   
-    const tagQuery = `SELECT tagid, title, description, adviselink, tagpicture FROM tag WHERE tagid = ?`;
+    const tagQuery = `SELECT tagid, title, description, adviselink, tagpicture, looks, likes FROM tag WHERE tagid = ?`;
     db.query(tagQuery, [tagid], (err, tagData) => {
       const tag = tagData[0];
       const plantQuery = `
@@ -65,6 +65,8 @@ function gettag(req, res) {
             description: tag.description,
             adviselink: tag.adviselink,
             tagpicture: tag.tagpicture,
+            looks: tag.looks,
+            likes: tag.likes,
             plants: plants,
             suppliers: supplierResults
           };

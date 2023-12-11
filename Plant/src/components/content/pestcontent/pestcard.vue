@@ -10,11 +10,11 @@
           <img :src="card.pestpicture" class="pest-picture" alt="" style="width: 100px; height: 100px;"/>
           <div style="padding: 14px">
             <span>{{ card.pestname }}</span> 
+            <div class="button">
             <el-button text class="button" @click="() => goPestPage(card.pestid)" size="large">Enter</el-button>
-            <div class="bottom">
+          </div>
              
             </div> 
-          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -50,39 +50,10 @@
   </script>
   
   <style scoped>
-  
-  
-  
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
   .button {
     padding: 0;
     min-height: auto;
   }
-  
-  .description {
-    white-space: nowrap; 
-    overflow: hidden;
-    max-width: 100%; 
-  }
-  
-  .description-text {
-    margin-top: 10px; 
-    text-overflow: ellipsis; 
-  }
-  .share-picture {
-    width: 100%;
-    display: block;
-  }
-  
-  div[style] {
-    padding-bottom: 10px;
-  }
+ 
   </style>
   

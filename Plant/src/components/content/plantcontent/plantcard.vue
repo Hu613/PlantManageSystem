@@ -10,7 +10,9 @@
         <img :src="card.plantpicture" class="plant-picture" alt="" style="width: 100px; height: 100px;"/>
         <div style="padding: 14px">
           <span>{{ card.plantname }}</span> 
+          <div class="button">
           <el-button text class="button" @click="() => goPlantPage(card.plantid)" size="large">Enter</el-button>
+        </div>
         </div>
       </el-card>
     </el-col>

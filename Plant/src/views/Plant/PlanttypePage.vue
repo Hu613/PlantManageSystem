@@ -1,19 +1,31 @@
 <template>
     <div>
       <h1 class="title">{{ tagData.title }}</h1>
-
-      <div class="plant-info">
-        <h1 class="description">Description :<br /><p>{{ tagData.description }}</p></h1>
-      </div>
       <div class="pictures">
         <br/>
         <img :src="tagData.tagpicture" style="width: 500px; height: 500px;" class="tag-picture" />
       </div>
+
+
+        <h1 class="description">
+          Description :
+        </h1>
+        <h2>{{ tagData.description }}</h2>
+        <h1 class="description">
+          Looks :
+        </h1>
+        <h2>{{ tagData.looks }}</h2>
+        <h1 class="description">
+          Likes :
+        </h1>
+        <h2>{{ tagData.likes }}</h2>
+
+      
      <div class="pest">
       <h1>This type of plant</h1>
       <div class="plantshow">
-    <el-carousel height="150px">
-      <el-carousel-item v-for="plant in tagData.plants" :key="plant.plantid">
+    <el-carousel height="600px" :interval="4000" type="card" :autoplay="true" class="carousel">
+      <el-carousel-item v-for="plant in tagData.plants" :key="plant.plantid" >
         <img :src="plant.plantpicture" alt="Plant" @click="goPlantPage(plant.plantid)" class="plant-image"/>
       </el-carousel-item>
     </el-carousel>
@@ -82,39 +94,29 @@
   </script>
   <style>
   .title {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  .plant-info {
-    display: flex;
-    align-items: center;
+    font-size: 50px;
+    text-align: center;
     margin-bottom: 10px;
   }
 
   .pictures {
     margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+
   }
   .plant-picture {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
     margin-bottom: 10px;
+    object-fit: contain;
   }
   .description {
     margin-bottom: 10px;
   }
-  .el-carousel__item h3 {
-  color: #475669;
-  opacity: 0.75;
-  line-height: 150px;
-  margin: 0;
-  text-align: center;
-}
 
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
 
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
+  
+
   </style>
   

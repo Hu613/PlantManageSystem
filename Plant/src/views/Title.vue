@@ -1,18 +1,15 @@
 <template>
   <div class="top">
     <div class="top-Firstline">
+      <router-link to="/" class="logo-link">
+      <img src="./RegisterPage/webpicture.png" class="website-logo" alt="Website Logo" />
+    </router-link>
       <form @submit.prevent="googlesearch" class="searchbar">
         <input type="search" v-model="searchcontent" placeholder="Google Search" />
         <el-button circle @click="googlesearch"><el-icon><ChromeFilled /></el-icon></el-button>
       </form>
-      <el-button class="searchbar" :icon="Search" circle @click="goSearchPage"></el-button>
-      <user></user>
-    </div>
-    <div class="top-SecondLine">
-    <router-link to="/" class="logo-link">
-      <img src="./RegisterPage/webpicture.png" class="website-logo" alt="Website Logo" />
-    </router-link>
       <router-link to="/" class="titlecontent">HomePage</router-link>
+      <router-link to="/Guide" class="titlecontent">Guide</router-link>
       <div  class="Content">
         <el-dropdown >
     <span class="el-dropdown-link">
@@ -28,9 +25,8 @@
   </el-dropdown>
       </div>
       <router-link to="/Social" class="titlecontent">Social</router-link>
-    </div>
-   
-    <div class="top-right">
+      <el-button class="searchbar" :icon="Search" circle @click="goSearchPage"></el-button>
+      <user></user>
     </div>
   </div>
 </template>
@@ -101,6 +97,7 @@ function googlesearch() {
 
 .titlecontent{
   color: #4caf50;
+  font-size: larger;
 }
 
 .el-dropdown-link, .el-dropdown-menu {

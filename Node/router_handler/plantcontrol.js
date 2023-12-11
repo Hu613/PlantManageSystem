@@ -51,7 +51,7 @@ function getplant(req, res) {
   
   function getPlantPage(req, res) {
     const plantid = req.params.plantid;
-    const plantQuery = `SELECT plantid, plantname, description, planthelp, plantpicture FROM plant WHERE plantid = ?`;
+    const plantQuery = `SELECT plantid, plantname, description, planthelp, plantpicture, plantneed, wheretoplant, howtoplant, timetoplant FROM plant WHERE plantid = ?`;
     db.query(plantQuery, [plantid], (err, plantData) => {
       const plant = plantData[0];
       const pestQuery = `SELECT pe.pestid, pe.pestname, pe.pestpicture FROM plant_pest pp JOIN pest pe ON pe.pestid = pp.pestid WHERE pp.plantid = ?`;
@@ -66,6 +66,10 @@ function getplant(req, res) {
             description: plant.description,
             planthelp: plant.planthelp,
             plantpicture: plant.plantpicture,
+            plantneed: plant.plantneed,
+            wheretoplant: plant.wheretoplant,
+            howtoplant: plant.howtoplant,
+            timetoplant: plant.timetoplant,
             pests: pests
           };
           res.json(plantData); 

@@ -64,22 +64,4 @@ onMounted(async () => {
   min-height: auto;
 }
 
-.description {
-  white-space: nowrap; 
-  overflow: hidden;
-  max-width: 100%; 
-}
-
-.description-text {
-  margin-top: 10px; 
-  text-overflow: ellipsis; 
-}
-.share-picture {
-  width: 100%;
-  display: block;
-}
-
-div[style] {
-  padding-bottom: 10px;
-}
 </style>

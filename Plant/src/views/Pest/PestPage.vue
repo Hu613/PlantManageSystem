@@ -2,19 +2,21 @@
     <div>
       <h1 class="title">{{ pestData.pestname }}</h1>
 
+      <div class="pictures">
+        <br/>
+        <img :src="pestData.pestpicture" style="width: 600px; height: 600px;" class="pest-picture" />
+      </div>
+
       <div class="pest-info">
         <h1 class="description">Description :<br /><p>{{ pestData.description }}</p></h1>
       </div>
-      <div class="pictures">
-        <br/>
-        <img :src="pestData.pestpicture" style="width: 500px; height: 500px;" class="pest-picture" />
-      </div>
+    
      <div class="pest">
       <h1>It may appear on these plants!!!!</h1>
       <div class="pestshow">
-    <el-carousel height="150px">
+    <el-carousel height="600px" :interval="4000" type="card" :autoplay="true" class="carousel">
       <el-carousel-item v-for="plant in pestData.plants" :key="plant.plantid">
-        <img :src="plant.plantpicture" alt="Plant" @click="goPlantPage(plant.plantid)" class="plant-image"/>
+        <img :src="plant.plantpicture" alt="Plant" @click="goPlantPage(plant.plantid)" class="plant-picture"/>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -82,41 +84,32 @@
   });
   
   </script>
-  <style>
+  <style scoped>
   .title {
-    font-size: 24px;
+    font-size: 50px;
     margin-bottom: 10px;
+    text-align: center;
   }
-  .plant-info {
+  .pest-info {
     display: flex;
-    align-items: center;
     margin-bottom: 10px;
   }
 
   .pictures {
     margin-bottom: 10px;
+    display: flex;
+    height: 100%;
+    justify-content: center;
   }
   .plant-picture {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
     margin-bottom: 10px;
+    object-fit: contain;
   }
+
   .description {
     margin-bottom: 10px;
   }
-  .el-carousel__item h3 {
-  color: #475669;
-  opacity: 0.75;
-  line-height: 150px;
-  margin: 0;
-  text-align: center;
-}
-
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
   </style>
   

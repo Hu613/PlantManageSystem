@@ -4,9 +4,9 @@
     
   <router-link to="/" class="menuitem">HomePage<el-icon size="large"><house /></el-icon></router-link>
   <router-link v-if="userId" :to="`/UserPage/${userId}`" class="menuitem">MyPage<el-icon size="large"><Notification /></el-icon></router-link>
-  <el-button v-if="userId" text @click="dialogVisible = true" class="menuitem"><el-icon>My Concern<StarFilled /></el-icon>
+  <el-button v-if="userId" text @click="dialogVisible = true" class="menuitem"><el-icon>My Following<StarFilled /></el-icon>
   </el-button>
-  <el-dialog v-model="dialogVisible" title="My Concern" width="30%" class="concerndialog" style="background-image: url('./concernback.png'); background-repeat: no-repeat; background-size: cover;">
+  <el-dialog v-model="dialogVisible" title="My Following" width="30%" class="concerndialog" style="background-image: url('./concernback.png'); background-repeat: no-repeat; background-size: cover;">
     <userconcern v-if="userId"></userconcern>
     <template #footer>
       <span class="dialog-footer">

@@ -65,7 +65,6 @@
     localStorage.removeItem('user');
     isLoggedIn.value = false;
     router.push('/');
-    location.reload();
     
   }
 

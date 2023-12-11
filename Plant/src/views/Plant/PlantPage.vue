@@ -2,17 +2,24 @@
     <div>
       <h1 class="title">{{ plantData.plantname }}</h1>
 
+      <div class="pictures">
+        <br/>
+        <img :src="plantData.plantpicture" style="width: 600px; height: 600px;" class="plant-picture" />
+      </div>
+
       <div class="plant-info">
         <h1 class="description">Description :<br /><p>{{ plantData.description }}</p></h1>
       </div>
-      <div class="pictures">
-        <br/>
-        <img :src="plantData.plantpicture" style="width: 500px; height: 500px;" class="plant-picture" />
-      </div>
+        <h1 class="description">If you want plant {{ plantData.plantname }}, you will need these :<br /></h1><h2>{{ plantData.plantneed }}</h2>
+        <h1 class="description">Where should you plant your {{ plantData.plantname }}?<br /></h1><h2>{{ plantData.wheretoplant }}</h2>
+        <h1 class="description">How to plant the {{ plantData.plantname }}?<br /></h1><h2>{{ plantData.howtoplant }}</h2>
+        <h1 class="description">When to plant {{ plantData.plantname }}?<br /></h1><h2>{{ plantData.timetoplant }}</h2>
+
+    
      <div class="pest">
       <h1>These Pest careful!</h1>
       <div class="pestshow">
-    <el-carousel height="150px">
+        <el-carousel height="300px"  :interval="4000" type="card" :autoplay="true" class="carousel">
       <el-carousel-item v-for="pest in plantData.pests" :key="pest.pestid">
         <img :src="pest.pestpicture" alt="Pest" @click="goPestPage(pest.pestid)" class="pest-image"/>
       </el-carousel-item>
@@ -63,19 +70,22 @@
   });
   
   </script>
-  <style>
+  <style scoped>
   .title {
-    font-size: 24px;
+    font-size: 50px;
     margin-bottom: 10px;
+    text-align: center;
   }
   .plant-info {
     display: flex;
-    align-items: center;
     margin-bottom: 10px;
   }
 
   .pictures {
     margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
   }
   .plant-picture {
     width: 100%;
@@ -84,20 +94,16 @@
   .description {
     margin-bottom: 10px;
   }
-  .el-carousel__item h3 {
-  color: #475669;
-  opacity: 0.75;
-  line-height: 150px;
-  margin: 0;
-  text-align: center;
-}
 
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
+  .pest-image{
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 10px;
+    object-fit: contain;
+  }
 
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
+
+
+
   </style>
   
