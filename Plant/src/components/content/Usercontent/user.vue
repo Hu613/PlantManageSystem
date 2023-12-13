@@ -1,19 +1,32 @@
 <template>
     <div class="usercontent">
       <div v-if="!userId" class="user-actions">
-        <router-link to="/Register" class="user-link">Register</router-link>
+        <el-button class="user-link" @click="dialogVisibleregister = true">
+    Register
+  </el-button>
         <el-button class="user-link" @click="dialogVisible = true">
     Login
   </el-button>
 
   <el-dialog
     v-model="dialogVisible"
-    title="Tips"
+    title="Login"
     width="30%">
     <template #footer>
       <span class="dialog-footer">
-        <Logintest></Logintest>
+        <Login></Login>
         <el-button @click="dialogVisible = false">Cancel</el-button>
+      </span>
+    </template>
+  </el-dialog>
+  <el-dialog
+    v-model="dialogVisibleregister"
+    title="Register"
+    width="30%">
+    <template #footer>
+      <span class="dialog-footer">
+        <Register></Register>
+        <el-button @click="dialogVisibleregister = false">Cancel</el-button>
       </span>
     </template>
   </el-dialog>
@@ -51,8 +64,10 @@
   import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
   import axios from 'axios';
-  import Logintest from "../Usercontent/Logintest.vue";
+  import Login from "../Usercontent/Login.vue";
+  import Register from "../Usercontent/Register.vue"
   const dialogVisible = ref(false)
+  const dialogVisibleregister = ref(false)
   const isLoggedIn = ref(false);
   const username = ref('');
   const userAvatar = ref(''); 
@@ -60,11 +75,13 @@
   const router = useRouter();
   const gardenName = ref('');
   const createDialogVisible = ref(false);
+  const createdialogVisibleregister = ref(false);
 
   function logout() {
     localStorage.removeItem('user');
     isLoggedIn.value = false;
     router.push('/');
+    location.reload();
     
   }
 

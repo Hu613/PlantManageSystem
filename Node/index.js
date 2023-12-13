@@ -21,9 +21,6 @@ app.use(session({
 
 app.use(express.json()); 
 
-app.get('/session', function(req, res){
-  res.json({userId: req.session.userId, username: req.session.username, useravator: user.useravator, lat: user.lat, lon: user.lon});
-});
 
 app.use('/user', require('./router/user'))
 app.use('/social', require('./router/social'))

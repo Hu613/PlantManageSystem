@@ -126,7 +126,7 @@ onMounted(async () => {
 
 <style scoped>
 .userplant-picture {
-  width: 100%;
-  height: auto;
+  width: 400px;
+  height: 400px;
 }
 </style>

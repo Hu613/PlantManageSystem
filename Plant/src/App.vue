@@ -47,12 +47,7 @@ import UserSide from "@/views/UserSide.vue";
 }
 .userside {
   flex: 0 0 220px; 
-   
-  
-  
-  
-  
-  
+    
 }
 
 .context {

@@ -54,6 +54,7 @@
     });
    
     alert('Delete collect successful');
+    location.reload();
     console.log(response.data);
     
   } catch (error) {

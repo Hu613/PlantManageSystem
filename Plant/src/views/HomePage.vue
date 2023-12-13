@@ -1,7 +1,4 @@
 <template>
-  <div class="tagpart">
-    <planttypetag></planttypetag>
-  </div>
   <div class="shareguide">
     <h1 class="title">Share your Experience you want to share</h1>
     <el-row :gutter="20" class="icon-row">
@@ -54,7 +51,6 @@
   import Hotsocial from '../components/content/socialcontent/hotsocial.vue';
   import pestcard from '../components/content/pestcontent/pestcard.vue';
   import suppliercard from '../components/content/suppliercontent/suppliercard.vue';
-  import planttypetag from '../components/content/plantcontent/planttypetag.vue';
   </script>
   
   <style scoped>

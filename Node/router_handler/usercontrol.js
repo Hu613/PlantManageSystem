@@ -40,9 +40,7 @@ db.getConnection((err, connection) => {
               console.error('Error creating user: ', err);
               res.status(500).json({ error: 'Internal server error' });
             } else {
-              req.session.userId = id;
-              res.status(200).json({ message: 'Registration successful', userId: id });
-              console.log("userId", req.userid)
+              res.status(200).json({ message: 'Registration successful'});
             }
           });
         }
