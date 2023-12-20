@@ -100,7 +100,7 @@ const goUserPage = (userId) => {
     userId: userId.value,
     shareid: shareid.value,
   });
-  console.log(route.params.shareid);
+  console.log('Pageid',route.params.shareid);
   try {
       const response = await axios.post('http://localhost:3000/comment/addcomment', {
         content: contentForm.commentcontent,
@@ -109,7 +109,6 @@ const goUserPage = (userId) => {
       });
       alert('Add Comment successful');
       location.reload();
-      console.log(response.data);
       
     } catch (error) {
       alert('Add comment failed');

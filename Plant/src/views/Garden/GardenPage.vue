@@ -50,11 +50,11 @@ const currentCardIndex = ref(-1);
 
 
 const openChangeDialog = (index) => {
-  changeDialogVisible.value = true;
-  currentCardIndex.value = index;
-  selectedPlantType.value = null;
-  selectedPlant.value = null;
-  plantOptions.value = [];
+  changeDialogVisible.value = true; //open dialog
+  currentCardIndex.value = index; //get index
+  selectedPlantType.value = null; //set plany type is null
+  selectedPlant.value = null; //set plant is null
+  plantOptions.value = []; // define a array to store plants
 };
 
 //get user choose plant type plant data in plantOptions 
@@ -78,7 +78,7 @@ const confirmPlantSelection = async () => {
     gardenCards.value[currentCardIndex.value] = {
       ...selectedPlantData,
       plantid: plantId
-    }; //update card
+    }; //update card, plantid to ensure if plantId is null, still can set gardenCards'plantid as null.
 
     try {
       const response = await axios.post('http://localhost:3000/gardencard/createOrUpdateGardenCard', {

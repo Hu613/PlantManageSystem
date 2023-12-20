@@ -18,8 +18,9 @@ db.getConnection((err, connection) => {
 
 function addcomment(req,res){
     const {userId, pageId, content} = req.body;
+    console.log('Comment data',req.body);
     if(!userId || !pageId || !content){
-        return res.status(400).json({error: 'Error!'})
+        return res.status(400).json({error: 'Error! Some data miss!'})
     }
    
     const id = uuid();

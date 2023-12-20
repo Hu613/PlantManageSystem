@@ -107,6 +107,7 @@ const createGarden = async () => {
   
   onMounted(() => {
     const userStr = localStorage.getItem('user'); //get user info from localStorage
+    console.log(localStorage);
     if (userStr) {
       const user = JSON.parse(userStr);
       isLoggedIn.value = true; //update 
