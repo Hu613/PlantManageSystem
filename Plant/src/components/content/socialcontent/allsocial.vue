@@ -4,9 +4,9 @@
         v-for="(card, index) in cards"
         :key="card.id"
         :span="4"
-        :offset="index % 4 === 0 ? 0 : (index % 5 === 1 ? 1 : (index % 5 === 2 ? 2 : (index % 5 === 3 ? 3 : 0)))"
+        :offset="index % 5 === 0 ? 0 : (index % 5 === 1 ? 1 : (index % 5 === 2 ? 2 : (index % 5 === 3 ? 3 : 0)))"
       >
-        <el-card :body-style="{ padding: '10px' }">
+        <el-card :body-style="{ padding: '12px' }">
           <img :src="card.sharepicture"
             class="share-picture"
             alt=""
@@ -109,9 +109,11 @@
   }
   
   .share-picture {
-    width: 100%;
-    display: block;
-  }
+  width: 100px;
+  height: 100px;
+  display: block;
+}
+
   
   div[style] {
     padding-bottom: 10px;

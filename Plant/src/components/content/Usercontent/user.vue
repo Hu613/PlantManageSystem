@@ -1,5 +1,6 @@
 <template>
     <div class="usercontent">
+      <!-- if user is not login, display login and register button -->
       <div v-if="!userId" class="user-actions">
         <el-button class="user-link" @click="dialogVisibleregister = true">
     Register
@@ -14,7 +15,7 @@
     width="30%">
     <template #footer>
       <span class="dialog-footer">
-        <Login></Login>
+        <Login></Login>  <!-- import login component -->
         <el-button @click="dialogVisible = false">Cancel</el-button>
       </span>
     </template>
@@ -25,13 +26,14 @@
     width="30%">
     <template #footer>
       <span class="dialog-footer">
-        <Register></Register>
+        <Register></Register> <!-- import register component -->
         <el-button @click="dialogVisibleregister = false">Cancel</el-button>
       </span>
     </template>
   </el-dialog>
       </div>
   
+       <!-- if user is login, display user info and drop-down menus -->
       <div v-if="userId" class="user-info">
         <el-dropdown >
     <span class="el-dropdown-link">
@@ -66,20 +68,19 @@
   import axios from 'axios';
   import Login from "../Usercontent/Login.vue";
   import Register from "../Usercontent/Register.vue"
-  const dialogVisible = ref(false)
-  const dialogVisibleregister = ref(false)
-  const isLoggedIn = ref(false);
+  const dialogVisible = ref(false)//manage login dialog
+  const dialogVisibleregister = ref(false)//manage register dialog
+  const isLoggedIn = ref(false);//set user is login or not
   const username = ref('');
   const userAvatar = ref(''); 
   const userId = ref('');
   const router = useRouter();
   const gardenName = ref('');
-  const createDialogVisible = ref(false);
-  const createdialogVisibleregister = ref(false);
+  const createDialogVisible = ref(false);//manage createGarden dialog
 
   function logout() {
-    localStorage.removeItem('user');
-    isLoggedIn.value = false;
+    localStorage.removeItem('user'); //empty localStorage user info
+    isLoggedIn.value = false; //set isLoggedIn as false
     router.push('/');
     location.reload();
     
@@ -105,10 +106,10 @@ const createGarden = async () => {
 };
   
   onMounted(() => {
-    const userStr = localStorage.getItem('user');
+    const userStr = localStorage.getItem('user'); //get user info from localStorage
     if (userStr) {
       const user = JSON.parse(userStr);
-      isLoggedIn.value = true;
+      isLoggedIn.value = true; //update 
       username.value = user.username;
       userId.value = user.userId;
       userAvatar.value = `http://localhost:3000/${user.useravatar}`;

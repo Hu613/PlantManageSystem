@@ -5,11 +5,13 @@
       <h1>Authour:</h1><br/>
       <img :src="shareData.useravatar" alt="User avatar" class="user-avatar"  @click="() => goUserPage(shareData.userId)"/>
       <span>{{ shareData.username }}</span>
+      <!--Follow user and unfollow user buttons-->
       <div v-if="userId" class="concern">
       <el-button v-if="!value1" circle ><el-icon size="30px" style="color: aquamarine;" v-if="!value1" @click="concern(shareData.userId)"><Plus /></el-icon></el-button>
       <el-button v-if="value1" circle ><el-icon size="30px" style="color: red;" v-if="value1" @click="deleteconcern(shareData.userId)"><Close /></el-icon></el-button>
     </div>
     </div>
+    <!--Page content-->
     <div class="content">
     <div class="pictures">
       <h1>Exhibition :</h1><br/>
@@ -21,9 +23,10 @@
     </div>
     <h1 class="description">Description :<br /><p>{{ shareData.description }}</p></h1>
      <span style="font-size: 25px;">Create at {{ shareData.createtime }}<el-icon><Timer /></el-icon> {{ shareData.entertime }} Views<el-icon><View /></el-icon></span>
-
+    <!--Collect button-->
     <div class="button">
       <el-button v-if="userId" @click="() => collect(shareData.shareid)" type="warning" icon="Star" size="large" circle></el-button>
+      <!--add comment button-->
       <el-button type="primary" v-if="userId" @click="dialogVisible = true"><el-icon><ChatDotRound /></el-icon></el-button>
   <el-dialog v-model="dialogVisible" title="Comments" width="30%" draggable>
     <div class="contentForm">
@@ -42,6 +45,7 @@
   </el-dialog>
 
     </div>
+    <!--Display this page's comment-->
     <div class="Comment">
       <div><h1>Comment :</h1></div>
       <comment :page-id="shareid"></comment>
@@ -72,6 +76,24 @@ const goUserPage = (userId) => {
     
   };
 
+  const collect = async (shareid) => {
+    try {
+      const response = await axios.post('http://localhost:3000/user/collect', {
+       shareid: shareid,
+       userId: userId.value,
+      });
+     
+      alert('Collect successful');
+      console.log(response.data);
+      
+    } catch (error) {
+      alert('Collect failed');
+      console.error('Collect error:', error);
+
+    }
+  };
+
+  //add comment function
   const addcomment = async () => {
     console.log('Sending comment data:', {
     content: contentForm.commentcontent,
@@ -95,7 +117,8 @@ const goUserPage = (userId) => {
 
     }
   };
-
+  
+  //follow the share's author
   const concern = async (concernedUserId) => {
   try {
     const response = await axios.post('http://localhost:3000/user/concern', {
@@ -105,35 +128,22 @@ const goUserPage = (userId) => {
       concernuseravatar: shareData.value.useravatar,
     });
     console.log('Concern successful:', response.data);
-    value1.value = true;
+    value1.value = true; //set value1 is true to hide the follow button and display unfollow button
   } catch (error) {
     console.error('Error handling concern:', error);
   }
 };
-const collect = async (shareid) => {
-    try {
-      const response = await axios.post('http://localhost:3000/user/collect', {
-       shareid: shareid,
-       userId: userId.value,
-      });
-     
-      alert('Collect successful');
-      console.log(response.data);
-      
-    } catch (error) {
-      alert('Collect failed');
-      console.error('Collect error:', error);
 
-    }
-  };
 
+//unfollow user function
 const deleteconcern = async (concernedUserId) => {
   try {
     const response = await axios.post('http://localhost:3000/user/deleteconcern', {
+      userId: userId.value,
       concernuserId: concernedUserId,
     });
     console.log('Unconcern successful:', response.data);
-    value1.value = false;
+    value1.value = false; //set value1 is false, to display follow button and hide unfollow button
   } catch (error) {
     console.error('Error handling unconcern:', error);
   }
@@ -149,20 +159,21 @@ const deleteconcern = async (concernedUserId) => {
   if (userStr) {
     const user = JSON.parse(userStr); 
     userId.value = user.userId;
-  }
+  } //get userId who enter the sharepage
   
   const shareidFromRoute = route.params.shareid;
+  //get shareid from route
   
   if (shareidFromRoute) {
     try {
       const response = await axios.get(`http://localhost:3000/social/getsocialpage/${shareidFromRoute}`);
       if (response.data) {
-        shareData.value = response.data;
+        shareData.value = response.data; //get this sharePage data
 
-        
+        //Check if the user is following the author
         try {
           const checkResponse = await axios.get(`http://localhost:3000/user/checkconcern/${userId.value}/${shareData.value.userId}`);
-          value1.value = checkResponse.data.isConcerned;
+          value1.value = checkResponse.data.isConcerned; // set result in value1, true or false
           console.log('check concern', checkResponse)
         } catch (error) {
           console.error('Error checking concern status:', error);

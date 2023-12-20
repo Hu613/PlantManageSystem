@@ -2,7 +2,7 @@
   <div class="top">
     <div class="top-Firstline">
       <router-link to="/" class="logo-link">
-      <img src="./RegisterPage/webpicture.png" class="website-logo" alt="Website Logo" />
+      <img src="./backpage.png" class="website-logo" alt="Website Logo" />
     </router-link>
       <form @submit.prevent="googlesearch" class="searchbar">
         <input type="search" v-model="searchcontent" placeholder="Google Search" />
@@ -40,7 +40,7 @@ import User from "../components/content/Usercontent/user.vue";
 import { ElMessageBox } from 'element-plus';
 const router=useRouter();
 const searchcontent = ref('');
-const dialogVisible = ref(false)
+
 
 
 const goSearchPage = async () => {

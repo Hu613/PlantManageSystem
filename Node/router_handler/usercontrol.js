@@ -26,7 +26,7 @@ db.getConnection((err, connection) => {
         res.status(500).json({ error: 'Internal server error' });
       } else {
         if (results.length > 0) {
-          res.status(400).json({ error: 'Email already registered' });
+          res.status(400).json({ error: 'Email already register' });
         } else {
           const id = uuid();
           const picture = req.file;
@@ -49,19 +49,19 @@ db.getConnection((err, connection) => {
   }
   
   function login(req, res) {
-    const { email, password } = req.body;
+    const { email, password } = req.body; //get email and password
     console.log('Received login request:', req.body);
-    const query = `SELECT * FROM user WHERE email = ?`;
+    const query = `SELECT * FROM user WHERE email = ?`; //query database find the email
     db.query(query, [email], (err, results) => {
       if (err) {
         console.error('Error querying database: ', err);
         res.status(500).json({ error: 'Internal server error' });
       } else {
-        if (results.length === 0) {
+        if (results.length === 0) { //find email
           res.status(401).json({ error: 'Invalid email or password' });
         } else {
-          const user = results[0];
-          if (password === user.password) {
+          const user = results[0]; 
+          if (password === user.password) { //ensure password is right and save the user information in session and sent to front-end
             req.session.userId = user.id;
             req.session.username = user.username;
             req.session.useravatar = user.useravatar;
@@ -80,14 +80,14 @@ db.getConnection((err, connection) => {
   function createExperience(req, res) {
     const { title, description,userId } = req.body;
     console.log("user session userId", req.body);
-    const shareid = uuid();
+    const shareid = uuid(); //use uuid to create a unique shareid
   
-    const sharePicture = req.files.map(file => file.path).join(';');  
+    const sharePicture = req.files.map(file => file.path).join(';');  //Process the uploaded files, concatenate the file paths into a string, and separate them with ;
     const entertime = 0;
 
     const insertQuery = `
       INSERT INTO share (shareid, title, description, sharepicture, userId, entertime)
-      VALUES (?, ?, ?, ?, ?, ?)`;
+      VALUES (?, ?, ?, ?, ?, ?)`;// create inserQuery.
   
 
     db.query(insertQuery, [shareid, title, description, sharePicture, userId, entertime], (err, results) => {
@@ -223,14 +223,14 @@ db.getConnection((err, connection) => {
   }
 
   function deleteconcern(req, res) {
-    const { concernuserId } = req.body;
-    console.log("concernuserId", req.body);
+    const { userId, concernuserId } = req.body;
+    console.log("delete concernuserId", req.body);
 
     const deleteQuery = `
-      DELETE FROM concern WHERE concernuserId=?`;
+      DELETE FROM concern WHERE userId=? and concernuserId=?`;
   
 
-    db.query(deleteQuery, [concernuserId], (err, results) => {
+    db.query(deleteQuery, [userId, concernuserId], (err, results) => {
       if (err) {
         console.error('Error delete from database: ', err);
         res.status(500).json({ error: 'Internal server error' });
@@ -245,7 +245,7 @@ db.getConnection((err, connection) => {
     const query = `
       SELECT COUNT(*) AS count
       FROM concern
-      WHERE userId = ? AND concernuserId = ?`;
+      WHERE userId = ? AND concernuserId = ?`;//use COUNT(*) to check all line
   
     db.query(query, [userId, concernuserId], (err, results) => {
       if (err) {

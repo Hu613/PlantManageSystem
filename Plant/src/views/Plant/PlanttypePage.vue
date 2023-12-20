@@ -26,7 +26,7 @@
       <div class="plantshow">
     <el-carousel height="600px" :interval="4000" type="card" :autoplay="true" class="carousel">
       <el-carousel-item v-for="plant in tagData.plants" :key="plant.plantid" >
-        <img :src="plant.plantpicture" alt="Plant" @click="goPlantPage(plant.plantid)" class="plant-image"/>
+        <img :src="plant.plantpicture" alt="Plant" @click="goPlantPage(plant.plantid)" class="plant-picture"/>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -92,7 +92,7 @@
   });
   
   </script>
-  <style>
+  <style scoped>
   .title {
     font-size: 50px;
     text-align: center;

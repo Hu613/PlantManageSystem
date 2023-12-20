@@ -1,11 +1,12 @@
 <template>
     <el-row>
+      <!-- Display cards using Element UI's grid system -->
       <el-col
         v-for="(card, index) in cards"
         :key="card.id"
-        :span="8"
+        :span="4"
         :offset="index % 5 === 0 ? 0 : (index % 5 === 1 ? 1 : (index % 5 === 2 ? 2 : (index % 5 === 3 ? 3 : 0)))"
-      >
+      ><!-- single user collect card-->
         <el-card :body-style="{ padding: '10px' }">
           <img :src="card.sharepicture"
             class="share-picture"
@@ -14,7 +15,6 @@
           <div style="padding: 14px">
             <span>{{ card.title }}</span> 
             <div class="bottom">
-              <span>{{ card.createtime }}</span>
               <el-button text class="button" @click="() => goSharepage(card.shareid)" size="large">Enter</el-button>
               <el-button  v-if="currentuser" class="button" @click="() => deletecollect(card.shareid)" type="danger" icon="Delete" size="large" circle></el-button>
             </div>
@@ -32,13 +32,15 @@
   import axios from 'axios';
   import { useRouter } from 'vue-router';
   const router = useRouter();
-  const currentuser = ref(false);
+  const currentuser = ref(false); //set current user is the page owner or not
   const props = defineProps({
   userId: String
   
-});
+}); //receive userId
 
-  const cards = ref([]);
+  const cards = ref([]); // store card info
+
+  //function go share page
   const goSharepage = async (shareid) => {
     try {
       await axios.post(`http://localhost:3000/user/incrementEnterTime/${shareid}/enter`); 
@@ -47,6 +49,8 @@
       console.error('Can not enter this page', error);
     }
   }
+
+
   const deletecollect = async (shareid) => {
   try {
     const response = await axios.post('http://localhost:3000/user/deletecollect', {
@@ -69,14 +73,14 @@
     const user = JSON.parse(userStr);
     if(user.userId === props.userId){
       currentuser.value = true;
-    }
+    }// get current userId and compare it with this userpage's userId to determine the current user is the owner or not
   }
     try {
       const response = await axios.get(`http://localhost:3000/social/getusercollect/${props.userId}`);
       cards.value = response.data.map(share => ({
         ...share,
         sharepicture: `http://localhost:3000/${share.sharepicture.split(';')[0]}`
-      }));
+      }));//get card information and set the first picture to display.
     } catch (error) {
       console.error('Failed to fetch experiences:', error);
     }
@@ -110,12 +114,11 @@
   }
   
   .share-picture {
-    width: 100%;
-    display: block;
-  }
-  
-  div[style] {
-    padding-bottom: 10px;
-  }
+  width: 100px;
+  height: 100px;
+  display: block;
+}
+
+
   </style>
   

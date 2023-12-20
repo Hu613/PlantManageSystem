@@ -32,7 +32,7 @@ function gettag(req, res) {
   }
 
   function getPlanttypePage(req, res) {
-    const tagid = req.params.tagid;
+    const tagid = req.params.tagid; //get tagid。
   
     const tagQuery = `SELECT tagid, title, description, adviselink, tagpicture, looks, likes FROM tag WHERE tagid = ?`;
     db.query(tagQuery, [tagid], (err, tagData) => {
@@ -41,7 +41,7 @@ function gettag(req, res) {
         SELECT p.plantid, p.plantname, p.plantpicture, p.userplantpicture
         FROM tag_plant tp 
         JOIN plant p ON p.plantid = tp.plantid
-        WHERE tp.tagid = ?`;
+        WHERE tp.tagid = ?`; //Get all plants information corresponding to the tagid
       db.query(plantQuery, [tagid], (err, plants) => {
         if (err) {
           res.status(500).json({ error: 'Database error in fetching plants' });
@@ -52,7 +52,7 @@ function gettag(req, res) {
           SELECT s.supplierid, s.suppliername, s.description, s.supplierlink
           FROM tag_supplier ts
           JOIN supplier s ON s.supplierid = ts.supplierid
-          WHERE ts.tagid = ?`;
+          WHERE ts.tagid = ?`;//Get all suppliers information corresponding to the tagid
         db.query(supplierQuery, [tagid], (err, supplierResults) => {
           if (err) {
             res.status(500).json({ error: 'Database error in fetching suppliers' });
@@ -69,8 +69,9 @@ function gettag(req, res) {
             likes: tag.likes,
             plants: plants,
             suppliers: supplierResults
-          };
+          };//Construct an object tagData that contains all the queried information, including the tag information corresponding to the tagid and all plant and supplier information.
           res.json(tagData);
+          console.log(plants);
         });
       });
     });

@@ -98,6 +98,8 @@
   .pest-image{
     max-width: 100%;
     max-height: 100%;
+    width: 500px;
+    height: 500px;
     margin-bottom: 10px;
     object-fit: contain;
   }

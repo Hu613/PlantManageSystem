@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <Title></Title> 
+    <Title></Title>   <!--import Title-->
     <el-divider />
     <div class="main-content">
       <div class="userside">
-        <UserSide></UserSide>
+        <UserSide></UserSide> <!--import Userside-->
         
       </div>
       <div class="midcontent">
-        <Content></Content>
+        <Content></Content><!--import Content-->
       </div>
     </div>
   </div>

@@ -107,11 +107,9 @@ onMounted(async () => {
 }
 
 .share-picture {
-  width: 100%;
+  width: 100px;
+  height: 100px;
   display: block;
 }
 
-div[style] {
-  padding-bottom: 10px;
-}
 </style>

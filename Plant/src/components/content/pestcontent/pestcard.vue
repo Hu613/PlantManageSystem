@@ -7,7 +7,7 @@
           :offset="index % 4 === 0 ? 0 : (index % 5 === 1 ? 1 : (index % 5 === 2 ? 2 : (index % 5 === 3 ? 3 : 0)))"
       >
         <el-card :body-style="{ padding: '10px' }">
-          <img :src="card.pestpicture" class="pest-picture" alt="" style="width: 100px; height: 100px;"/>
+          <img :src="card.pestpicture" class="pest-picture" alt="" style="width: 200px; height: 200px;"/>
           <div style="padding: 14px">
             <span>{{ card.pestname }}</span> 
             <div class="button">

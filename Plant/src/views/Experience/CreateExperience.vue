@@ -8,10 +8,13 @@
         <el-form-item label="Description">
       <el-input  v-model="formLabelAlign.description" type="textarea" />
     </el-form-item>
+    <!--upload picture-->
         <el-form-item label="Sharepicture">
+          <!--allow user upload more than one picture-->
           <input type="file" multiple @change="handleFileUpload" />
         </el-form-item>
         <el-form>
+          <!--display the numbers of upload pictures-->
             <span>Upload files: {{ formLabelAlign.sharepictures.length }}</span>
         </el-form>
         <el-form-item>
@@ -36,11 +39,12 @@
 
   });
   
-
+  //handleFileUpload function, convert user upload files  ito a JavaScript array and store in formLabelAlign's sharepictures
   const handleFileUpload = (event) => {
     formLabelAlign.sharepictures = Array.from(event.target.files);
     
   };
+  //get user's info who is posting this experience
   onMounted(() => {
     const userStr = localStorage.getItem('user');
     if (userStr) {
@@ -51,10 +55,10 @@
 ;
     }
   });
-
+ //create Experience
   const submitForm = async () => {
     const formData = new FormData();
-    formData.append('title', formLabelAlign.title);
+    formData.append('title', formLabelAlign.title);//createformData,add title, description, userId and sharepictures in formData
     formData.append('description', formLabelAlign.description);
     formData.append('userId', userId.value);
     for(let i=0;i < formLabelAlign.sharepictures.length; i++){
@@ -62,8 +66,9 @@
     }
  
     try {
+      //send request and data to back-end
       const response = await axios.post('http://localhost:3000/user/createExperience', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+        headers: { 'Content-Type': 'multipart/form-data' }, //Set http head, set content type as multipart/form-data to send formdata and user upload files
       });
       alert('Create successful');
       console.log(response.data);

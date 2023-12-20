@@ -1,5 +1,5 @@
 <template>
-    <div class="login-form">
+    <div class="login-form"><!-- create login form -->
       <el-form
         :label-position="labelPosition"
         label-width="100px"
@@ -7,7 +7,7 @@
         style="max-width: 160px"
       >
         <el-form-item label="Email">
-          <el-input v-model="loginForm.email" />
+          <el-input v-model="loginForm.email" /><!-- email content, v-model automatically synchronises the data between the value of el-input and loginForm.email -->
         </el-form-item>
         <el-form-item label="Password">
           <el-input type="password" v-model="loginForm.password" />
@@ -22,24 +22,25 @@
   <script lang="ts" setup>
   import { reactive, ref } from 'vue';
   import axios from 'axios';
-  import {loadRouteLocation, useRouter} from 'vue-router'
+  import {useRouter} from 'vue-router'
   const router = useRouter();
   const labelPosition = ref('right');
 
+  //Create responsive loginform data
   const loginForm = reactive({
     email: '',
     password: ''
   });
   
   
-
+  //login function
   const submitLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/user/login', {
+      const response = await axios.post('http://localhost:3000/user/login', {//send request to back-end
         email: loginForm.email,
         password: loginForm.password
       });
-      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('user', JSON.stringify(response.data)); //store the user's information in LocalStorage, after login, go homepage 
       router.push('/');
       location.reload();
       alert('Login successful');
@@ -47,15 +48,10 @@
       
     } catch (error) {
       alert('Login failed');
-      console.error('Login error:', error);
+      console.error('Login error:', error.response.data.error);
 
     }
   };
   </script>
   
-  <style scoped>
-  .login-form {
-
-  }
-  </style>
   

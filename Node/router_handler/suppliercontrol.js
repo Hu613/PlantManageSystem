@@ -33,7 +33,7 @@ function getsupplier(req, res) {
   }
   
   function getplantkitsupplier(req, res) {
-    const query = `SELECT supplierid, suppliername, LEFT(description, 30) as description, supplierlink FROM supplier WHERE suppliertype = 'plantkit'`;
+    const query = `SELECT supplierid, suppliername, description, supplierlink FROM supplier WHERE suppliertype = 'plantkit'`;
     db.query(query, (err, results) => {
       if (err) {
         console.error('Error fetching supplier: ', err);
@@ -49,7 +49,7 @@ function getsupplier(req, res) {
     });
   }
   function getpestsupplier(req, res) {
-    const query = `SELECT supplierid, suppliername, LEFT(description, 30) as description, supplierlink FROM supplier WHERE suppliertype = 'pest'`;
+    const query = `SELECT supplierid, suppliername, description, supplierlink FROM supplier WHERE suppliertype = 'pest'`;
     db.query(query, (err, results) => {
       if (err) {
         console.error('Error fetching supplier: ', err);
@@ -65,7 +65,7 @@ function getsupplier(req, res) {
     });
   }
   function getplanttypesupplier(req, res) {
-    const query = `SELECT supplierid, suppliername, LEFT(description, 30) as description, supplierlink FROM supplier WHERE suppliertype = 'planttype'`;
+    const query = `SELECT supplierid, suppliername, description, supplierlink FROM supplier WHERE suppliertype = 'planttype'`;
     db.query(query, (err, results) => {
       if (err) {
         console.error('Error fetching supplier: ', err);

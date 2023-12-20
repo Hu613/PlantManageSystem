@@ -77,29 +77,12 @@ function getplant(req, res) {
     });
   }
 
-  function incrementPlantEnterTime(req, res) {
-    const { plantid } = req.params; 
-  
-    const updateQuery = `
-      UPDATE plant SET entertime = entertime + 1 WHERE plantid = ?
-    `;
-  
-    db.query(updateQuery, [plantid], (err, results) => {
-      if (err) {
-        console.error('Error updating database: ', err);
-        res.status(500).json({ error: 'Internal server error' });
-      } else {
-        res.status(200).json({ message: 'Enter time incremented successfully' });
-      }
-    });
-  }
-  
+
 
   module.exports = {
     getplant,
     incrementPlantEnterTime,
     getPlantPage,
-    incrementPlantEnterTime,
   };
   
    

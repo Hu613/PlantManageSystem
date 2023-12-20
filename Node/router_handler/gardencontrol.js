@@ -71,11 +71,9 @@ function createGarden(req, res) {
       }
   
       const cards = results.map(row => ({
-        gardencardid: row.gardencardid,
         plantid: row.plantid,
         plantname: row.plantname,
         userplantpicture: row.userplantpicture,
-        planthelp: row.planthelp,
         position: row.position
       }));
   

@@ -1,17 +1,5 @@
 <template>
   <div class="context">
-    <router-view></router-view>
+    <router-view></router-view> <!--import router-view, when router change, this partwill change too and display the content-->
   </div>
 </template>
-
-<script>
-export default {
-  name: "Content",
-  created() {
-  
-  },
-};
-</script>
-<style scoped>
-
-</style>

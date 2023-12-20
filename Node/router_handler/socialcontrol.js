@@ -99,7 +99,7 @@ function getnewsocial(req, res) {
 
 function gethotsocial(req, res) {
   const query = `SELECT shareid, title, LEFT(description, 30) as description, sharepicture FROM share 
-                 ORDER BY entertime DESC LIMIT 4`;
+                 ORDER BY entertime DESC LIMIT 4`;//select shareid ,title, description only 30, sharepicutre from share table, limit only 4 records.
   db.query(query, (err, results) => {
     if (err) {
       console.error('Error fetching share: ', err);
@@ -109,7 +109,7 @@ function gethotsocial(req, res) {
       const share = results.map(share => ({
         ...share,
         image: share.sharepicture.split(';')[0] 
-      }));
+      }));//Modify image to be the first of the sharepicture string,and send share img to front-end
       res.json(share);
     }
   });

@@ -20,7 +20,8 @@ function createOrUpdateGardenCard(req, res) {
   const { position, plantid, gardenid } = req.body;
   const gardencardid = uuid();
 
-  const query = `INSERT INTO gardencard (gardencardid, plantid, position, gardenid) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE plantid = VALUES(plantid), position = VALUES(position), gardenid = VALUES(gardenid)`;
+  const query = `INSERT INTO gardencard (gardencardid, plantid, position, gardenid) VALUES (?, ?, ?, ?) 
+  ON DUPLICATE KEY UPDATE plantid = VALUES(plantid), position = VALUES(position), gardenid = VALUES(gardenid)`;//Insert the data into gardencard to create a new record. also update plantid if gardenid already exists in the table, position river gardenid.
 
   db.query(query, [gardencardid, plantid, position, gardenid], (err, result) => {
     if (err) {

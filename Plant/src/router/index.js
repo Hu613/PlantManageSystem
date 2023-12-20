@@ -1,5 +1,5 @@
 import{ createRouter, createWebHashHistory} from "vue-router"
-import HomePage from "../views/HomePage.vue"
+import HomePage from "../views/HomePage.vue" //import Page
 import Guide from "../views/Guide.vue"
 import CreateExperience from "../views/Experience/CreateExperience.vue"
 import Social from "../views/Social.vue"
@@ -18,7 +18,7 @@ import Supplier from "../views/Supplier/Supplier.vue"
 const routes = [
   {
     path:"/",component: HomePage
-  },
+  }, //create route for page
   {
     path:"/Guide",component: Guide
   },
@@ -66,7 +66,7 @@ const routes = [
 const router = createRouter({
 history:createWebHashHistory(),
 routes
-  })
+  })//create router to use
 
 
 
