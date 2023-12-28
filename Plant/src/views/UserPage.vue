@@ -5,15 +5,15 @@
         <h2 class="user-name">{{ userData.username }}</h2>
    
       <div class="garden">
-        <h1>My Garden :</h1><br/>
+        <h1>My Gardens :</h1><br/>
        <usergardencard :userId="userId"></usergardencard>
       </div>
       <div class="share">
-        <h1>My Share :</h1><br/>
+        <h1>My Shares :</h1><br/>
         <usersocial :userId="userId"></usersocial>
       </div>
       <div class="collect">
-        <h1>My Collect :</h1><br/>
+        <h1>My Collection :</h1><br/>
        <usercollect :userId="userId"></usercollect>
       </div>
     </div>

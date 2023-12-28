@@ -38,7 +38,7 @@ function createGarden(req, res) {
 
   function getgarden(req, res) {
     const userId = req.params.userId;
-    const query = `SELECT gardenid, gardenname, userId FROM garden WHERE userId = ?`;
+    const query = `SELECT gardenid, gardenname, userId FROM garden WHERE userId = ? ORDER BY createtime DESC`;
     db.query(query, [userId],(err, results) => {
       if (err) {
         console.error('Error fetching garden: ', err);
@@ -46,7 +46,7 @@ function createGarden(req, res) {
       } else {
       
         const garden = results.map(garden => ({
-          ...garden
+          ...garden 
         }));
         res.json(garden);
       }

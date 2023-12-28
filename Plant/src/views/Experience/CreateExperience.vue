@@ -16,6 +16,7 @@
         <el-form>
           <!--display the numbers of upload pictures-->
             <span>Upload files: {{ formLabelAlign.sharepictures.length }}</span>
+            <p>Less than 5 pictures :)</p>
         </el-form>
         <el-form-item>
           <el-button type="primary" @click="submitForm">Create!</el-button>

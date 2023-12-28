@@ -97,7 +97,9 @@ const createGarden = async () => {
       userId: userId.value
     });
     alert('Garden created successfully');
-    location.reload();
+    const creategardenid = response.data.gardenid;
+    console.log('newgarden id',creategardenid);
+    router.push(`/GardenPage/${creategardenid}`);
     createDialogVisible.value = false;
   } catch (error) {
     alert('Failed to create garden');
