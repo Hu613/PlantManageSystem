@@ -20,3 +20,13 @@ The file in the route_handler are to interact with the database and send the con
 index.js is a typical Express application server setup, covering key aspects such as middleware configuration, routing settings, error handling, and server startup.
 
 PlantSystem.sql is the database.
+
+
+APIS:
+The apis for this project are all stored in the router folder on the backend.
+comment. js stores apis about get comments and add comment.
+garden.js stores the apis for planning the user's garden layout.
+gardencard. js stores the apis for the plant card of the user's garden layout plan.
+pest, social, supplier, tag, plant store apis for getting information about pests, user shared experiences, suppliers, plant types, plants
+search. js stores the apis for the search function.
+user. js stores the apis for user functionality and for getting various types of information about the user into the user interface.

@@ -9,6 +9,7 @@
             :value="item.tagid"
           />
           <el-option label="All" value="all"></el-option>
+          <el-option label="The most attractive plants" value="attractive"></el-option>
       </el-select>
 
       <h1>List: </h1><br/>
@@ -34,7 +35,16 @@ const fetchPlantsByTag = async () => {
       console.error('Error fetching all plants:', error);
       filteredPlants.value = [];
     }
-  } else {
+  }  else if (selectedTag.value === 'attractive') {
+    try {
+      const response = await axios.get('http://localhost:3000/plant/gethotplant');
+      filteredPlants.value = response.data;
+    } catch (error) {
+      console.error('Error fetching all plants:', error);
+      filteredPlants.value = [];
+    }
+  }
+  else {
     try {
       const response = await axios.get(`http://localhost:3000/tag/getPlanttypePage/${selectedTag.value}`);
       filteredPlants.value = response.data.plants;

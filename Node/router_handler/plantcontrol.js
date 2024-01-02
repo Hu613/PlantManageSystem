@@ -77,12 +77,28 @@ function getplant(req, res) {
     });
   }
 
+  function gethotplant(req, res) {
+    const query = `SELECT plantid, plantname, plantpicture FROM plant ORDER BY entertime DESC LIMIT 4`;
+    db.query(query, (err, results) => {
+      if (err) {
+        console.error('Error fetching plant: ', err);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+      
+        const plant = results.map(plant => ({
+          ...plant
+        }));
+        res.json(plant);
+      }
+    });
+  }
 
 
   module.exports = {
     getplant,
     incrementPlantEnterTime,
     getPlantPage,
+    gethotplant,
   };
   
    
