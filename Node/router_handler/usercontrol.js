@@ -1,22 +1,7 @@
 const db = require('../common/db');
 const { uuid } = require('../common/uuid');
 
-db.getConnection((err, connection) => {
-  if(err) {
-    console.error('Error connecting to database: ', err);
-  } else {
-    connection.ping(error => {
-      if (error) {
-        console.error('Error pinging database: ', error);
-      } else {
-        console.log('Connected to database!');
-      }
-      connection.release();
-    });
-  }
-});
-
-  function register(req, res) {
+  function register(req, res) { //User registration function
     const { username, email, password, lat, lon} = req.body;
     console.log('Received register request:', req.body);
     const checkQuery = `SELECT * FROM user WHERE email = ?`;
@@ -48,7 +33,7 @@ db.getConnection((err, connection) => {
     });
   }
   
-  function login(req, res) {
+  function login(req, res) { //user login function
     const { email, password } = req.body; //get email and password
     console.log('Received login request:', req.body);
     const query = `SELECT * FROM user WHERE email = ?`; //query database find the email
@@ -77,7 +62,7 @@ db.getConnection((err, connection) => {
   }
    
 
-  function createExperience(req, res) {
+  function createExperience(req, res) { //user post shares function
     const { title, description,userId } = req.body;
     console.log("user session userId", req.body);
     const shareid = uuid(); //use uuid to create a unique shareid
@@ -100,7 +85,7 @@ db.getConnection((err, connection) => {
     });
   }
   
-  function incrementEnterTime(req, res) {
+  function incrementEnterTime(req, res) { //increase of user-shared view count function
     const { shareid } = req.params; 
   
     const updateQuery = `
@@ -117,7 +102,7 @@ db.getConnection((err, connection) => {
     });
   }
 
-  function getuserpage(req, res) {
+  function getuserpage(req, res) { //get userpage's details function
     const userId = req.params.userId;
     console.log('userid', req.params.userId);
     const query = `
@@ -146,7 +131,7 @@ db.getConnection((err, connection) => {
     });
   }
 
-  function collect(req, res) {
+  function collect(req, res) { //collect other user's shares function
     const { shareid ,userId } = req.body;
     console.log("shareid and userId", req.body);
     const collectionid = uuid();
@@ -166,7 +151,7 @@ db.getConnection((err, connection) => {
     });
   }
 
-  function deleteshare(req, res) {
+  function deleteshare(req, res) { //delete user's posted shares function
     const { shareid } = req.body;
     console.log("shareid", req.body);
 
@@ -184,7 +169,7 @@ db.getConnection((err, connection) => {
     });
   }
 
-  function deletecollect(req, res) {
+  function deletecollect(req, res) {//delete user's collection function
     const { shareid } = req.body;
     console.log("shareid", req.body);
 
@@ -202,7 +187,7 @@ db.getConnection((err, connection) => {
     });
   }
 
-  function concern(req, res) {
+  function concern(req, res) { //follow other users function
     const { concernuserId ,userId, concernusername, concernuseravatar } = req.body;
     console.log("concernuserId and userId", req.body);
     const concernid = uuid();
@@ -222,7 +207,7 @@ db.getConnection((err, connection) => {
     });
   }
 
-  function deleteconcern(req, res) {
+  function deleteconcern(req, res) { //unfollow other users function
     const { userId, concernuserId } = req.body;
     console.log("delete concernuserId", req.body);
 
@@ -240,7 +225,7 @@ db.getConnection((err, connection) => {
     });
   }
 
-  function checkconcern(req, res) {
+  function checkconcern(req, res) { //check user follow the author or not funtion
     const { userId, concernuserId } = req.params;
     const query = `
       SELECT COUNT(*) AS count
@@ -258,10 +243,10 @@ db.getConnection((err, connection) => {
     });
   }
 
-  function getUserConcern(req, res) {
+  function getUserConcern(req, res) {//get user's following function
     const { userId } = req.params;
     console.log('userId',userId);
-    const concernQuery = `SELECT c.concernid, c.concernuserId, c.concernusername, c.concernuseravatar FROM user_concern uc JOIN concern c ON uc.concernid = c.concernid WHERE uc.id = ?`;
+    const concernQuery = `SELECT c.concernid, c.concernuserId, c.concernusername, c.concernuseravatar FROM concern c WHERE c.userId = ?`;
     db.query(concernQuery, [userId], (err, concerns) => {
       if (err) {
         res.status(500).json({ error: 'Database error in fetching concerns' });

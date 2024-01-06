@@ -4,7 +4,7 @@ const userControl = require('../router_handler/usercontrol');
 const multer = require('multer');
 
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'uploads/' });//Setting the storage path for uploaded images
 
 router.post('/login', userControl.login);
 

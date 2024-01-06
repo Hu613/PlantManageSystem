@@ -1,21 +1,7 @@
 const db = require('../common/db');
 
-db.getConnection((err, connection) => {
-  if(err) {
-    console.error('Error connecting to database: ', err);
-  } else {
-    connection.ping(error => {
-      if (error) {
-        console.error('Error pinging database: ', error);
-      } else {
-        console.log('Connected to database!');
-      }
-      connection.release();
-    });
-  }
-});
 
-function gettag(req, res) {
+function gettag(req, res) { //get all plant types information for the front-end to display the plant type's cards and tags.
     const query = `SELECT tagid, title, tagpicture FROM tag`;
     db.query(query, (err, results) => {
       if (err) {
@@ -31,7 +17,7 @@ function gettag(req, res) {
     });
   }
 
-  function getPlanttypePage(req, res) {
+  function getPlanttypePage(req, res) { //get the plant type page details for the front-end to display the Planttype page.
     const tagid = req.params.tagid; //get tagid。
   
     const tagQuery = `SELECT tagid, title, description, adviselink, tagpicture, looks, likes FROM tag WHERE tagid = ?`;

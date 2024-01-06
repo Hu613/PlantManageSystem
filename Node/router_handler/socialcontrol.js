@@ -1,21 +1,6 @@
 const db = require('../common/db');
 
-db.getConnection((err, connection) => {
-  if(err) {
-    console.error('Error connecting to database: ', err);
-  } else {
-    connection.ping(error => {
-      if (error) {
-        console.error('Error pinging database: ', error);
-      } else {
-        console.log('Connected to database!');
-      }
-      connection.release();
-    });
-  }
-});
-
-function getsocial(req, res) {
+function getsocial(req, res) {//get all shares information for the front-end to display the cards.
     const query = `SELECT shareid, title, LEFT(description, 30) as description, sharepicture FROM share`;
     db.query(query, (err, results) => {
       if (err) {
@@ -33,7 +18,7 @@ function getsocial(req, res) {
   }
 
   
-   function getsocialpage(req, res) {
+   function getsocialpage(req, res) {//get the shares information for the front-end to display the sharepage.
   const shareid = req.params.shareid;
   console.log('shareid', req.params.shareid);
   
@@ -79,7 +64,7 @@ function getsocial(req, res) {
   });
 }
 
-function getnewsocial(req, res) {
+function getnewsocial(req, res) {//get the new shares information for the front-end to display the cards.
   const query = `SELECT shareid, title, LEFT(description, 30) as description, sharepicture FROM share
                  ORDER BY createtime DESC LIMIT 4`;
   db.query(query, (err, results) => {
@@ -97,7 +82,7 @@ function getnewsocial(req, res) {
   });
 }
 
-function gethotsocial(req, res) {
+function gethotsocial(req, res) {//get hot shares information for the front-end to display the cards.
   const query = `SELECT shareid, title, LEFT(description, 30) as description, sharepicture FROM share 
                  ORDER BY entertime DESC LIMIT 4`;//select shareid ,title, description only 30, sharepicutre from share table, limit only 4 records.
   db.query(query, (err, results) => {
@@ -115,7 +100,7 @@ function gethotsocial(req, res) {
   });
 }
 
-function getusersocial(req, res) {
+function getusersocial(req, res) {//get the current logged in user's posted shares information for the front-end to display the cards.
   const userId = req.params.userId;
   const query = `SELECT shareid, title, LEFT(description, 30) as description, sharepicture, userId FROM share WHERE userId = ?`;
   db.query(query, [userId],(err, results) => {
@@ -134,7 +119,7 @@ function getusersocial(req, res) {
 }
 
 
-function getusercollect(req, res) {
+function getusercollect(req, res) {//get current logged in user's collect shares information for the front-end to display the cards.
   const userId = req.params.userId;
   const query = `SELECT s.shareid, s.title, LEFT(s.description, 30) as description, s.sharepicture, s.createtime FROM share s
     JOIN collection c ON s.shareid = c.shareid

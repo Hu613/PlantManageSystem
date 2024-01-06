@@ -1,23 +1,8 @@
 const db = require('../common/db');
 const { uuid } = require('../common/uuid');
 
-db.getConnection((err, connection) => {
-  if(err) {
-    console.error('Error connecting to database: ', err);
-  } else {
-    connection.ping(error => {
-      if (error) {
-        console.error('Error pinging database: ', error);
-      } else {
-        console.log('Connected to database!');
-      }
-      connection.release();
-    });
-  }
-});
 
-
-function createGarden(req, res) {
+function createGarden(req, res) {//create user's garden function.
     const { userId, gardenname } = req.body;
     const gardenid = uuid();
     console.log('garden data', req.body);
@@ -36,7 +21,7 @@ function createGarden(req, res) {
 }
 
 
-  function getgarden(req, res) {
+  function getgarden(req, res) { ////get the user's garden information for the front-end to display the cards.
     const userId = req.params.userId;
     const query = `SELECT gardenid, gardenname, userId FROM garden WHERE userId = ? ORDER BY createtime DESC`;
     db.query(query, [userId],(err, results) => {
@@ -54,7 +39,7 @@ function createGarden(req, res) {
   }
 
 
-  function getGardenPage(req, res) {
+  function getGardenPage(req, res) {//get the user's garden layout information for the front-end to display the gardenpage.
     const gardenId = req.params.gardenid;
   
     const query = `
@@ -82,7 +67,7 @@ function createGarden(req, res) {
     });
   }
   
-  function deletegarden(req, res) {
+  function deletegarden(req, res) {//delete user's garden function.
     const { gardenid } = req.body;
     console.log("garden", req.body);
   

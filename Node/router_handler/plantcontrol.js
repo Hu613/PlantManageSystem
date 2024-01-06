@@ -1,22 +1,6 @@
 const db = require('../common/db');
-const { uuid } = require('../common/uuid');
 
-db.getConnection((err, connection) => {
-  if(err) {
-    console.error('Error connecting to database: ', err);
-  } else {
-    connection.ping(error => {
-      if (error) {
-        console.error('Error pinging database: ', error);
-      } else {
-        console.log('Connected to database!');
-      }
-      connection.release();
-    });
-  }
-});
-
-function getplant(req, res) {
+function getplant(req, res) {//get all plants information for the front-end to display the card.
     const query = `SELECT plantid, plantname, plantpicture FROM plant`;
     db.query(query, (err, results) => {
       if (err) {
@@ -33,7 +17,7 @@ function getplant(req, res) {
   }
 
   
-  function incrementPlantEnterTime(req, res) {
+  function incrementPlantEnterTime(req, res) {//increase of plant view count function
     const { plantid } = req.params; 
   
     const updateQuery = `
@@ -49,7 +33,7 @@ function getplant(req, res) {
     });
   }
   
-  function getPlantPage(req, res) {
+  function getPlantPage(req, res) {//get the plant information for the front-end to display the plantpage.
     const plantid = req.params.plantid;
     const plantQuery = `SELECT plantid, plantname, description, planthelp, plantpicture, plantneed, wheretoplant, howtoplant, timetoplant FROM plant WHERE plantid = ?`;
     db.query(plantQuery, [plantid], (err, plantData) => {
@@ -77,8 +61,8 @@ function getplant(req, res) {
     });
   }
 
-  function gethotplant(req, res) {
-    const query = `SELECT plantid, plantname, plantpicture FROM plant ORDER BY entertime DESC LIMIT 4`;
+  function gethotplant(req, res) {//get hot plants information for the front-end to display the card.
+    const query = `SELECT plantid, plantname, plantpicture FROM plant ORDER BY entertime DESC LIMIT 3`;
     db.query(query, (err, results) => {
       if (err) {
         console.error('Error fetching plant: ', err);

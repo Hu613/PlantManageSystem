@@ -1,21 +1,6 @@
 const db = require('../common/db');
 
-db.getConnection((err, connection) => {
-  if(err) {
-    console.error('Error connecting to database: ', err);
-  } else {
-    connection.ping(error => {
-      if (error) {
-        console.error('Error pinging database: ', error);
-      } else {
-        console.log('Connected to database!');
-      }
-      connection.release();
-    });
-  }
-});
-
-function getsupplier(req, res) {
+function getsupplier(req, res) { //get all suppliers information for the front-end to display the cards.
     const query = `SELECT supplierid, suppliername, LEFT(description, 30) as description, supplierlink FROM supplier`;
     db.query(query, (err, results) => {
       if (err) {
@@ -32,7 +17,7 @@ function getsupplier(req, res) {
     });
   }
   
-  function getplantkitsupplier(req, res) {
+  function getplantkitsupplier(req, res) {//get plant kit suppliers information for the front-end to display the cards.
     const query = `SELECT supplierid, suppliername, description, supplierlink FROM supplier WHERE suppliertype = 'plantkit'`;
     db.query(query, (err, results) => {
       if (err) {
@@ -48,7 +33,7 @@ function getsupplier(req, res) {
       }
     });
   }
-  function getpestsupplier(req, res) {
+  function getpestsupplier(req, res) {//get pest control suppliers information for the front-end to display the cards.
     const query = `SELECT supplierid, suppliername, description, supplierlink FROM supplier WHERE suppliertype = 'pest'`;
     db.query(query, (err, results) => {
       if (err) {
@@ -64,7 +49,7 @@ function getsupplier(req, res) {
       }
     });
   }
-  function getplanttypesupplier(req, res) {
+  function getplanttypesupplier(req, res) {//get planttype suppliers information for the front-end to display the cards.
     const query = `SELECT supplierid, suppliername, description, supplierlink FROM supplier WHERE suppliertype = 'planttype'`;
     db.query(query, (err, results) => {
       if (err) {

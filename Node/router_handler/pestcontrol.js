@@ -1,22 +1,7 @@
 const db = require('../common/db');
-const { uuid } = require('../common/uuid');
 
-db.getConnection((err, connection) => {
-  if(err) {
-    console.error('Error connecting to database: ', err);
-  } else {
-    connection.ping(error => {
-      if (error) {
-        console.error('Error pinging database: ', error);
-      } else {
-        console.log('Connected to database!');
-      }
-      connection.release();
-    });
-  }
-});
 
-function getpest(req, res) {
+function getpest(req, res) {//get all pests information for the front-end to display the card.
     const query = `SELECT pestid, pestname, pestpicture FROM pest`;
     db.query(query, (err, results) => {
       if (err) {
@@ -32,7 +17,7 @@ function getpest(req, res) {
     });
   }
   
-  function getPestPage(req, res) {
+  function getPestPage(req, res) {//get the pest information for the front-end to display the pestpage.
     const pestid = req.params.pestid;
   
     const pestQuery = `SELECT pestid, pestname, description, pestcontrol, prevention, pestpicture FROM pest WHERE pestid = ?`;

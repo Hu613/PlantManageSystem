@@ -14,9 +14,9 @@ db.getConnection((err, connection) => {
       connection.release();
     });
   }
-});
+});//test for a successful connection to the database
 
-function addcomment(req,res){
+function addcomment(req,res){//add comment to the sharepage function.
     const {userId, pageId, content} = req.body;
     console.log('Comment data',req.body);
     if(!userId || !pageId || !content){
@@ -35,7 +35,7 @@ function addcomment(req,res){
       });
     }
     
-    function getCommentsByPageId(req, res) {
+    function getCommentsByPageId(req, res) {//get the current sharepage's comments.
         const pageId = req.params.pageId;
         const query = `
           SELECT c.id, c.userId, c.pageId, c.content, c.createtime, u.username, u.useravatar 

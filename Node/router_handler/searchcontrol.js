@@ -1,6 +1,6 @@
 const db = require('../common/db');
 
-function search(req, res) {
+function search(req, res) {//search users, shares and plants in the database.
     console.log('Search route called');
     const query = req.body.query;
     const searchResults = {

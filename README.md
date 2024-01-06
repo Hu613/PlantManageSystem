@@ -24,9 +24,88 @@ PlantSystem.sql is the database.
 
 APIS:
 The apis for this project are all stored in the router folder on the backend.
+
 comment. js stores apis about get comments and add comment.
-garden.js stores the apis for planning the user's garden layout.
+router.post('/addcomment', commentControl.addcomment);
+router.get('/getCommentsByPageId/:pageId', commentControl.getCommentsByPageId);
+
+garden.js stores the apis for get the user's garden and layout, create and delete user's garden.
+router.post('/createGarden', gardenControl.createGarden);
+
+router.get('/getgarden/:userId', gardenControl.getgarden);
+
+router.get('/getGardenPage/:gardenid', gardenControl.getGardenPage);
+
+router.post('/deletegarden', gardenControl.deletegarden);
+
 gardencard. js stores the apis for the plant card of the user's garden layout plan.
+router.post('/createOrUpdateGardenCard', gardencardControl.createOrUpdateGardenCard);
+
 pest, social, supplier, tag, plant store apis for getting information about pests, user shared experiences, suppliers, plant types, plants
+router.get('/getpest', pestControl.getpest);
+
+router.get('/getPestPage/:pestid', pestControl.getPestPage);
+
+router.get('/getplant', plantControl.getplant);
+
+router.get('/getPlantPage/:plantid', plantControl.getPlantPage);
+
+router.post('/incrementPlantEnterTime/:plantid/enter', plantControl.incrementPlantEnterTime);
+
+router.get('/gethotplant', plantControl.gethotplant);
+
+router.get('/getsocial', socialControl.getsocial);
+
+router.get('/gethotsocial', socialControl.gethotsocial);
+
+router.get('/getnewsocial', socialControl.getnewsocial);
+
+router.get('/getusersocial/:userId', socialControl.getusersocial);
+
+router.get('/getsocialpage/:shareid', socialControl.getsocialpage);
+
+router.get('/getusercollect/:userId', socialControl.getusercollect);
+
+router.get('/getsupplier', supplierControl.getsupplier);
+
+
+router.get('/getplanttypesupplier', supplierControl.getplanttypesupplier);
+
+
+router.get('/getpestsupplier', supplierControl.getpestsupplier);
+
+
+router.get('/getplantkitsupplier', supplierControl.getplantkitsupplier);
+
+
+router.get('/gettag', tagControl.gettag);
+
+router.get('/getPlanttypePage/:tagid', tagControl.getPlanttypePage);
+
 search. js stores the apis for the search function.
+router.post('/search', searchControl.search);
+
 user. js stores the apis for user functionality and for getting various types of information about the user into the user interface.
+router.post('/login', userControl.login);
+
+router.post('/register', upload.single('avatar'), userControl.register);
+
+router.post('/createExperience', upload.array('sharepictures',5), userControl.createExperience);
+
+router.post('/incrementEnterTime/:shareid/enter', userControl.incrementEnterTime);
+
+router.get('/getuserpage/:userId', userControl.getuserpage);
+
+router.post('/collect', userControl.collect);
+
+router.post('/deleteshare', userControl.deleteshare);
+
+router.post('/deletecollect', userControl.deletecollect);
+
+router.post('/concern', userControl.concern);
+
+router.post('/deleteconcern', userControl.deleteconcern);
+
+router.get('/checkconcern/:userId/:concernuserId', userControl.checkconcern);
+
+router.get('/getUserConcern/:userId', userControl.getUserConcern);
